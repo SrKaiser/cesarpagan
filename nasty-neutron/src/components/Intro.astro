@@ -1,0 +1,97 @@
+<div class="intro">
+    <h1>Encantado, soy César Pagán</h1>
+    <h2>Ingeniero de Software</h2>
+    <div class="row"> 
+        <button class="contact-button">Contáctame</button>
+        <button class="contact-button">Descargar CV</button>
+    </div>
+</div>
+<div class="waves"></div>
+<div class="about-container">About Me</div>
+<div class="waves-reverse"></div>
+<style>
+    .intro {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    h1, h2 {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    h1 {
+        font-size: 4.5rem;
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: 3.5rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.8);
+        position: relative;
+    }
+
+    /* h2::after {
+        content: "Ingeniero de Software";
+        position: absolute;
+        bottom: -2.5rem;
+        left: 0;
+        right: 0;
+        color: rgba(255, 255, 255, 0.05);
+        z-index: -1;
+        text-align: center;
+        transform: scaleY(-1);
+        opacity: 0.5;
+    } */
+
+    .contact-button {
+        margin-top: 1.5rem;
+        margin-left: 0.75rem;
+        padding: 1rem 2rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-color);
+        border: none;
+        background: linear-gradient(145deg, rgba(35, 40, 58, 0.8), var(--accent-color));
+        border-top-left-radius: 10px; 
+        border-bottom-right-radius: 10px; 
+        border-top-right-radius: 0; 
+        border-bottom-left-radius: 0;
+        cursor: pointer;
+        transition: background-color 0.7s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .contact-button:hover {
+        background: linear-gradient(145deg, var(--accent-color), rgba(35, 40, 58, 0.8));
+    }
+
+    .waves {
+        margin-top: 4rem;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%230f1a33" fill-opacity="1" d="M0,128L34.3,106.7C68.6,85,137,43,206,58.7C274.3,75,343,149,411,176C480,203,549,181,617,149.3C685.7,117,754,75,823,90.7C891.4,107,960,181,1029,224C1097.1,267,1166,277,1234,266.7C1302.9,256,1371,224,1406,208L1440,192L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 375px;
+    }
+
+    .waves-reverse {
+        transform: rotate(180deg);
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%230f1a33" fill-opacity="1" d="M0,128L34.3,106.7C68.6,85,137,43,206,58.7C274.3,75,343,149,411,176C480,203,549,181,617,149.3C685.7,117,754,75,823,90.7C891.4,107,960,181,1029,224C1097.1,267,1166,277,1234,266.7C1302.9,256,1371,224,1406,208L1440,192L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 375px;
+    }
+
+    .about-container {
+        background-color: #0f1a33; 
+        color: #ffffff; 
+        text-align: center;
+        height: 400px;
+        padding: 50px 20px; 
+        font-size: 2rem; 
+        font-family: 'Roboto', sans-serif; 
+    }
+
+</style>

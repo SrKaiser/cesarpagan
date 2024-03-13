@@ -1,5 +1,4 @@
 ---
-// Este es el área de Frontmatter Script de Astro, donde puedes escribir JavaScript.
 const logoIconPath = '/assets/logo-darkmode.png';
 const linkedInIconPath = '/assets/linkedin-darkmode.png';
 const gitHubIconPath = '/assets/github-darkmode.png';
@@ -13,13 +12,13 @@ const ukFlagPath = '/assets/uk.png';
     <a href="/" class="logo">
         <img src={logoIconPath} alt="Logo" />
     </a>
-    <div class="navigation-center">
+    <!-- <div class="navigation-center">
         <a href="#inicio">Inicio</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#educacion">Educación</a>
         <a href="#contacto">Contacto</a>
-    </div>
+    </div> -->
     <nav>
         <a href="https://www.linkedin.com/in/cesarpaganv/" target="_blank">
             <img src={linkedInIconPath} alt="LinkedIn" />
@@ -39,18 +38,21 @@ const ukFlagPath = '/assets/uk.png';
 <style>
 .header {
     width: 100%;
-    height: 4.25rem;
+    height: 6.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-    background-color: #242831;
     color: white;
 }
 
-.logo img, .navigation-center a, nav a, nav button {
-    height: 3.5rem;
-    padding: 0 0.5rem;
+.logo img {
+    height: 4.5rem;
+    padding: 0 1.5rem;
+}
+
+.navigation-center a, nav a, nav button {
+    padding: 0 0.2rem;
     display: flex;
     align-items: center;
 }
@@ -92,7 +94,7 @@ nav a:hover, nav button:hover {
 }
 
 img {
-    height: 2.35rem;
+    height: 2.75rem;
     width: auto;
 }
 </style>
