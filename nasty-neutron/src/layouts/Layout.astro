@@ -17,43 +17,24 @@ const { title } = Astro.props;
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com"></link>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<slot />
 	</body>
 </html>
 <style is:global>
+
 	:root {
 		--background-color: #131416;
 		--text-color: #ffffff;
-		transition: background-color 0.3s ease, color 0.3s ease;
-		--accent-color: #3f4b69;
-		--hover-color: #427bff;
-	}
-
-	[data-theme="light"] {
-		--background-color: #ffffff;
-		--text-color: #13151a;
 	}
 
 	html {
 		background: var(--background-color);
 		color: var(--text-color);
 		font-family: "Merriweather Sans", sans-serif;
+		scroll-behavior: smooth;
 	}
-
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-
 
 </style>
