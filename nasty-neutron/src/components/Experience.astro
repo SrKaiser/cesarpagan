@@ -1,22 +1,57 @@
-<seciton id="experience" class="experience">
-    <div class="experience-container">
-        <h1 class="section-title"> Dónde he trabajado</h1>
+---
+const jobs = [
+    {
+        title: "Desarrollador Full-Stack",
+        company: "Verdementa",
+        description: "Desarrollador Full-Stack sobre la web de Verdementa con Django, Postgres y Redis, integrando funcionalidades front-end con tecnologías como JavaScript, HTML, CSS y Bootstrap.",
+        period: "Octubre 2023 - Presente",
+        color: "#54b948",
+        technologies: ["Django", "Python", "PostgreSQL", "Redis", "Javascript", "HTML", "Bootstrap", "CSS"], 
+    },
+    {
+        title: "Desarrollador Full-Stack y Soporte Técnico",
+        company: "Ayuntamiento de Cartagena",
+        description: "Contrato de prácticas currículares.\n\nDesarrollo de aplicaciones web con ASP.NET MVC y móviles Xamarin.Forms. (C#, HTML, XML y JavaScript).\n\nResolución de incidencias y preparación y montaje de ordenadores para empleados.",
+        period: "Julio 2022 - Agosto 2022",
+        color: "#378baf",
+        technologies: ["ASPNet", "Xamarin", "CSharp", "Javascript", "HTML", "CSS", "XML"],
+    },
+];
+
+import JobCard from "../widgets/JobCard.astro";
+---
+
+<section id="experience" class="experience">
+    <div>
+        <h1 class="section-title"> Experiencia </h1>
+        <div class="experience-container">
+            {jobs.map((job) => <JobCard job={job} key={job.company} />)}
+        </div>
     </div>
-</seciton>
+</section>
 
 <style>
+    .experience {
+        text-align: center;
+        padding: 50px 0; 
+        background-color: #151515; 
+    }
+
     .experience-container {
-        margin-top: 375px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 50px;
         color: #ffffff;
         text-align: center;
-        height: 1500px;
-        padding: 50px 400px;
+        height: auto;
+        padding: 50px;
+        margin-bottom: 5rem;
     }
 
     .section-title {
+        margin-top: 16rem;
         font-size: 4.5rem;
         font-weight: 800;
-        margin-bottom: 2rem;
     }
-
 </style>

@@ -1,7 +1,6 @@
 ---
+import DarkLightSwitch from '../widgets/DarkLightSwitch.astro';
 const logoIconPath = '/assets/logo-darkmode.png';
-const sunIconPath = '/assets/sun.png';
-const moonIconPath = '/assets/moon.png';
 const spainFlagPath = '/assets/spain.png';
 const ukFlagPath = '/assets/uk.png';
 ---
@@ -14,12 +13,10 @@ const ukFlagPath = '/assets/uk.png';
         <div class="navigation-right">
             <a href="#about-me">Sobre mí</a>
             <a href="#experience">Experiencia</a>
-            <a href="#proyectos">Proyectos</a>
-            <a href="#educacion">Educación</a>
-            <a href="#contacto">Contacto</a>
-            <button id="theme-toggle">
-                <img src={sunIconPath} alt="Toggle Dark/Light Mode" />
-            </button>
+            <a href="#projects">Proyectos</a>
+            <a href="#education">Educación</a>
+            <a href="#contact">Contacto</a>
+            <DarkLightSwitch />
             <button id="lang-en">
                 <img src={ukFlagPath} alt="Toggle Spanish/English Language" />
             </button>
@@ -28,6 +25,7 @@ const ukFlagPath = '/assets/uk.png';
 </header>
 
 <style>
+
 .header {
     position: fixed;
     top: 0;

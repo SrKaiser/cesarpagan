@@ -1,0 +1,62 @@
+---
+const projects = [
+    {
+        title: "Magic Mirror",
+        description: "Aplicación móvil diseñada para funcionar como apoyo en terapias, desarrollada con Flutter y Firebase para el seguimiento de eventos traumáticos pendientes de resolver.",
+        image: "/assets/MagicMirror.png",
+        video: "https://youtu.be/IIt-OtngdcM?si=BkonZinX9mCePxqE",
+        github: "https://github.com/SrKaiser/Magic-Mirror-TFG",
+        technologies: ["Flutter", "Dart", "Firebase"], 
+    },
+    {
+        title: "ZeppelinEAT",
+        description: "Proyecto full-stack integral dividido en dos repositorios que abarca tanto el desarrollo del back-end en Java y .NET como del front-end en React, Node, HTML, CSS y Bootstrap. Simula una aplicación similar de pedidos a domicilio de comida.",
+        image: "",
+        github: "https://github.com/SrKaiser/Frontend-Restaurantes",
+        github2: "https://github.com/SrKaiser/Backend-Restaurantes",
+        technologies: ["Java", "NET", "React", "Node", "HTML", "CSS", "Bootstrap"], 
+    },
+    {
+        title: "AppVideo",
+        description: "Aplicación de escritorio con diferentes funcionalidades similares a otras plataformas de video de las que ha sido inspirada. Desarrollada en Java siguiendo diferentes patrones, Swing, Maven, Java Bean y H2.",
+        image: "",
+        github: "https://github.com/SrKaiser/AppVideo",
+        technologies: ["Java"], 
+    },
+    {
+        title: "Super Ekko Game",
+        description: "Videojuego para ordenador desarrollado durante mi primer año de carrera, creado únicamente en C.",
+        image: "/assets/SuperEkkoGame.png",
+        video: "https://youtu.be/yqiMUC1myy8?si=YFherAN6iwWUfcpU",
+        technologies: ["C"], 
+    },
+];
+
+import ProjectCard from "../widgets/ProjectCard.astro";
+---
+
+<section id="projects" class="projects">
+    <div>
+        <h1 class="section-title text-center">Proyectos</h1>
+        <div class="projects-container">
+            {projects.map((project) => <ProjectCard project={project} key={project.title} />)}
+        </div>
+    </div>
+</section>
+
+<style>
+
+    .section-title {
+        font-size: 4.5rem;
+        font-weight: 800;
+    }
+    .projects-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-top: 3rem;
+        margin-bottom: 10rem;
+    }
+
+</style>

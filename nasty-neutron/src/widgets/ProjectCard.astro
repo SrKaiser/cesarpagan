@@ -1,0 +1,246 @@
+---
+const { project } = Astro.props;
+import Flutter from '../svg/tech/Flutter.astro';
+import Firebase from '../svg/tech/Firebase.astro';
+import Java from '../svg/tech/Java.astro';
+import NET from '../svg/tech/NET.astro';
+import React from '../svg/tech/React.astro';
+import Node from '../svg/tech/Node.astro';
+import HTML from '../svg/tech/HTML.astro';
+import Bootstrap from '../svg/tech/Bootstrap.astro';
+import CSS from '../svg/tech/CSS.astro';
+import Dart from '../svg/tech/Dart.astro';
+import C from '../svg/tech/C.astro';
+
+const technologyComponents = {
+    'Dart': Dart,
+    'C': C,
+    'Flutter': Flutter,
+    'Firebase': Firebase,
+    'Java': Java,
+    'React': React,
+    'NET': NET,
+    'Node': Node,
+    'HTML': HTML,
+    'Bootstrap': Bootstrap,
+    'CSS': CSS,
+};
+---
+<div class="card-container" style={{ backgroundImage: `url(${project.image})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+    <div class="card">
+        <div class="front-content">
+            <p>{project.title}</p>
+        </div>
+        <div class="content">
+            <p class="heading">{project.title}</p>
+            <p>
+                {project.description}
+            </p>
+            <div class="buttons-row">
+                {project.video && (
+                    <a href={project.video} class="project-button video-button" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 -7 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Youtube-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-200.000000, -368.000000)" fill="#ffffff"> <path d="M219.044,391.269916 L219.0425,377.687742 L232.0115,384.502244 L219.044,391.269916 Z M247.52,375.334163 C247.52,375.334163 247.0505,372.003199 245.612,370.536366 C243.7865,368.610299 241.7405,368.601235 240.803,368.489448 C234.086,368 224.0105,368 224.0105,368 L223.9895,368 C223.9895,368 213.914,368 207.197,368.489448 C206.258,368.601235 204.2135,368.610299 202.3865,370.536366 C200.948,372.003199 200.48,375.334163 200.48,375.334163 C200.48,375.334163 200,379.246723 200,383.157773 L200,386.82561 C200,390.73817 200.48,394.64922 200.48,394.64922 C200.48,394.64922 200.948,397.980184 202.3865,399.447016 C204.2135,401.373084 206.612,401.312658 207.68,401.513574 C211.52,401.885191 224,402 224,402 C224,402 234.086,401.984894 240.803,401.495446 C241.7405,401.382148 243.7865,401.373084 245.612,399.447016 C247.0505,397.980184 247.52,394.64922 247.52,394.64922 C247.52,394.64922 248,390.73817 248,386.82561 L248,383.157773 C248,379.246723 247.52,375.334163 247.52,375.334163 L247.52,375.334163 Z" id="Youtube"> </path> </g> </g> </g></svg>
+                    </a>
+                )}
+                {project.github && (
+                    <a href={project.github} class="project-button github-button" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>github [#ffffff]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#ffffff"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399" id="github-[#ffffff]"> </path> </g> </g> </g> </g></svg>
+                    </a>
+                )}
+                {project.github2 && (
+                    <a href={project.github2} class="project-button github2-button" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>github [#ffffff]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#ffffff"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399" id="github-[#ffffff]"> </path> </g> </g> </g> </g></svg>
+                    </a>
+                )}
+            </div>
+        </div>
+    </div>
+    <div class="buttons-sidebar">
+        {project.technologies.map((tech, index, array) => {
+            const TechComponent = technologyComponents[tech];
+            return <TechComponent />; 
+        })}
+    </div>
+</div>
+
+<style>
+
+    .card-container:nth-of-type(2n) {
+        justify-content: flex-end; 
+    }
+
+    .card-container:nth-of-type(2n) {
+        margin-top: 10rem; 
+    }
+
+    .card-container {
+        display: flex;
+        justify-content: flex-start; 
+        width: 800px;
+        height: 260px;
+        position: relative;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 1px #000000ee;
+        overflow: hidden;
+    }
+
+    .card-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.5); 
+        z-index: 1;
+    }
+
+    .card .front-content, .card .content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .card {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+    }
+
+    .card .front-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card .front-content p {
+        font-size: 32px;
+        font-weight: 800;
+        opacity: 1;
+        color: #427bff;
+        background-clip: text;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+        background: linear-gradient(-45deg, #427bff 0%, #204db5 100%);
+        color: #e8e8e8;
+        padding: 60px;
+        padding-right: 120px;
+        font-size: 18px;
+        line-height: 1.5;
+        border-radius: 5px;
+        pointer-events: none;
+        transform: translateX(-96%);
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card .content .heading {
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .card:hover .content {
+        transform: translateY(0);
+    }
+
+    .card:hover .front-content {
+        transform: translateX(-30%);
+    }
+
+    .card:hover .front-content p {
+        opacity: 0;
+    }
+
+    .card-container:nth-of-type(2n) .content {
+        transform: translateX(96%);
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        padding-left: 120px;
+    }
+
+    .card-container:nth-of-type(2n):hover .content {
+        transform: translateX(0%);
+    }
+
+
+    .project-button {
+        display: inline-block;
+        margin: 10px;
+        padding: 10px 10px;
+        font-size: 16px;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        pointer-events: all; 
+    }
+
+    
+    .project-button svg {
+        fill: #ffffff; 
+        width: 30px; 
+        height: 30px; 
+    }
+
+    .video-button {
+        background-color: #FF0000; 
+    }
+
+    .video-button:hover {
+        background-color: #CC0000; 
+    }
+
+    .github-button {
+        background-color: #333; 
+    }
+
+    .github-button:hover {
+        background-color: #2a2a2a; 
+    }
+
+    .github2-button {
+        background-color: #8c8c8c; 
+    }
+
+    .github2-button:hover {
+        background-color: #757575; 
+    }
+
+    .buttons-sidebar {
+        padding: 10px 10px;
+        position: absolute;
+        top: 0;
+        right: 0; 
+        width: 60px; 
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.603); 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        pointer-events: all;
+        z-index: 1; 
+    }
+
+    .card-container:nth-of-type(2n) .buttons-sidebar {
+        left: 0;
+    }
+
+</style>
