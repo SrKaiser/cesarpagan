@@ -76,7 +76,7 @@ const technologyComponents = {
     .card-container {
         display: flex;
         justify-content: flex-start; 
-        width: 800px;
+        width: 45%;
         height: 280px;
         position: relative;
         border-radius: 10px;
@@ -141,7 +141,7 @@ const technologyComponents = {
         justify-content: center;
         text-align: center;
         gap: 10px;
-        background: linear-gradient(90deg, #427bff 50%, #204db5a3 100%);
+        background: linear-gradient(90deg, #393b3f 50%, #191b1ea3 100%);
         color: #e8e8e8;
         padding: 60px;
         padding-right: 120px;
@@ -158,13 +158,16 @@ const technologyComponents = {
         font-weight: 700;
     }
 
-
     .card:hover .content {
         transform: translateY(0);
     }
 
-    .card:hover .front-content {
+    .card-container:nth-of-type(2n+1):hover .front-content {
         transform: translateX(-30%);
+    }
+
+    .card-container:nth-of-type(2n):hover .front-content {
+        transform: translateX(30%);
     }
 
     .card:hover .front-content p {
@@ -172,7 +175,7 @@ const technologyComponents = {
     }
 
     .card-container:nth-of-type(2n) .content {
-        background: linear-gradient(-90deg, #427bff 50%, #204db5a3 100%);
+        background: linear-gradient(-90deg, #393b3f 50%, #191b1ea3 100%);
         transform: translateX(96%);
         transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         padding-left: 120px;
@@ -249,6 +252,42 @@ const technologyComponents = {
     .card-container:nth-of-type(2n) .buttons-sidebar {
         left: 0;
     }
+
+
+    @media (max-width: 768px) {
+    .card-container {
+        width: 100%;
+        margin-bottom: 5rem;
+    }
+
+    .card .content {
+        padding: 20px; 
+        font-size: 16px;
+    }
+
+    .card .content .heading {
+        font-size: 24px;
+    }
+
+    .card-container:nth-of-type(2n) .content, .card-container:not(:nth-of-type(2n)) .content {
+        transition: transform 0.6s ease-out;
+    }
+
+    .card-container:nth-of-type(2n) .content {
+        padding-left: 30px;
+    }
+
+    .project-button svg {
+        fill: #ffffff; 
+        width: 20px; 
+        height: 20px; 
+    }
+
+    .card-container:nth-of-type(2n) {
+        margin-top: 0rem; 
+    }
+
+}
 
 
 </style>

@@ -8,13 +8,13 @@ const projects = [
         github: "https://github.com/SrKaiser/Magic-Mirror-TFG",
         technologies: ["Flutter", "Dart", "Firebase"], 
     },
+
     {
-        title: "DishDiscover",
-        description: "Proyecto Full-Stack que simula una aplicación de servicio de entrega de comida a domicilio. Se centra principalmente en la API del back-end utilizando Java y .NET, el front-end lo hace funcionar empleando React, Node, HTML, CSS y Bootstrap.",
-        image: "/assets/projects/DishDiscover.png",
-        github: "https://github.com/SrKaiser/Frontend-Restaurantes",
-        github2: "https://github.com/SrKaiser/Backend-Restaurantes",
-        technologies: ["Java", "NET", "React", "Node", "HTML", "CSS", "Bootstrap"], 
+        title: "Super Ekko Game",
+        description: "Videojuego para ordenador desarrollado durante mi primer año de carrera, creado únicamente en C.",
+        image: "/assets/projects/SuperEkkoGame.png",
+        video: "https://youtu.be/yqiMUC1myy8?si=YFherAN6iwWUfcpU",
+        technologies: ["C"], 
     },
     {
         title: "AppVideo",
@@ -24,11 +24,12 @@ const projects = [
         technologies: ["Java"], 
     },
     {
-        title: "Super Ekko Game",
-        description: "Videojuego para ordenador desarrollado durante mi primer año de carrera, creado únicamente en C.",
-        image: "/assets/projects/SuperEkkoGame.png",
-        video: "https://youtu.be/yqiMUC1myy8?si=YFherAN6iwWUfcpU",
-        technologies: ["C"], 
+        title: "DishDiscover",
+        description: "Proyecto Full-Stack que simula una aplicación de servicio de entrega de comida a domicilio. Se centra principalmente en la API del back-end utilizando Java y .NET, el front-end lo hace funcionar empleando React, Node, HTML, CSS y Bootstrap.",
+        image: "/assets/projects/DishDiscover.png",
+        github: "https://github.com/SrKaiser/Frontend-Restaurantes",
+        github2: "https://github.com/SrKaiser/Backend-Restaurantes",
+        technologies: ["Java", "NET", "React", "Node", "HTML", "CSS", "Bootstrap"], 
     },
 ];
 
@@ -58,6 +59,10 @@ import ProjectCard from "../widgets/ProjectCard.astro";
     @media (max-width: 768px) {
         .section-title {
             margin-top: 0rem;
+        }
+
+        .projects-container {
+            margin-bottom: 0rem;
         }
         
     }

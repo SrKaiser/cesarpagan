@@ -23,17 +23,22 @@ import EducationCard from "../widgets/EducationCard.astro";
 </section>
 
 <style>
-
-    .section-title {
-        font-size: 4.5rem;
-        font-weight: 800;
-    }
-
     .education-container {
         display: flex;
         justify-content: center;
         margin-top: 3rem;
         margin-bottom: 10rem;
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            margin-top: 0rem;
+        }
+
+        .education-container {
+            margin-bottom: 0rem;
+        }
+        
     }
 
 </style>

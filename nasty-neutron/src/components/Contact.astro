@@ -16,10 +16,6 @@ import ContactForm from "../widgets/ContactForm.astro";
 
 <style>
 
-    .section-title {
-        font-size: 4.5rem;
-        font-weight: 800;
-    }
 
     .section-text {
         font-size: 1.25rem;
@@ -34,6 +30,17 @@ import ContactForm from "../widgets/ContactForm.astro";
         align-items: center;
         margin-top: 3rem;
         margin-bottom: 5rem;
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            margin: 1.5rem 0;
+        }
+
+        .section-text {
+            font-size: .85rem;
+            padding: 0 20px; 
+        }
     }
 
 
