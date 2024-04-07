@@ -20,8 +20,7 @@
     }
 
     .section-title {
-        font-size: 4.5rem;
-        font-weight: 800;
+        color: white;
         margin-bottom: 2rem;
     }
 
@@ -76,5 +75,34 @@
         background-size: cover;
         height: 375px;
     }
+
+    @media (max-width: 768px) {
+        .about-container {
+            padding: 20px;
+            top: 150px; 
+        }
+
+        .section-title {
+            font-size: 2.5rem; 
+            margin-bottom: 1rem;
+        }
+
+        .section-text {
+            font-size: 1rem; 
+            margin-bottom: 1rem;
+        }
+
+        /* Ajusta o esconde los SVGs para móviles */
+        .waves-level-1, .waves-level-2, .waves-level-3, .waves-reverse {
+            height: 200px;
+            top: 520px;
+        }
+        
+        .waves-reverse {
+            height: 200px; 
+            top: 150px;
+        }
+    }
+
 
 </style>

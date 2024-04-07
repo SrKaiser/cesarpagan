@@ -1,11 +1,23 @@
 ---
+const schools = [
+    {
+        title: "Universidad de Murcia - Facultad de Informática",
+        subtitle: "Grado en Ingenería Informática - Mención en Software",
+        period: "Septiembre 2019 - Junio 2023",
+        description: "Mi paso por la Universidad marcó el inicio de mi carrera, 4 años donde mi formación trascendió el mero aprendizaje de programación. Sumergiéndome en el vasto mundo de la Informática, adquirí conocimientos en Computación, Redes, Sistemas Operativos, Matemáticas y sobre todo en el mundo del Software. Esta diversidad de materias no solo me forjó como un Ingeniero de Software, sino que también afianzó mi versatilidad y mi capacidad para adaptarme y innovar en el cambiante panorama tecnológico. ",
+        image: "/assets/education/UMU.jpg",
+        technologies: ["Flutter", "Dart", "Firebase"], 
+    },
+];
 
+import EducationCard from "../widgets/EducationCard.astro";
 ---
 
 <section id="education" class="education">
     <div>
-        <h1 class="section-title text-center">Education</h1>
+        <h1 class="section-title text-center">Educación</h1>
         <div class="education-container">
+            {schools.map((school) => <EducationCard school={school} key={school.title} />)}
         </div>
     </div>
 </section>
@@ -18,8 +30,10 @@
     }
 
     .education-container {
-        height: 200px;
+        display: flex;
+        justify-content: center;
         margin-top: 3rem;
+        margin-bottom: 10rem;
     }
 
 </style>

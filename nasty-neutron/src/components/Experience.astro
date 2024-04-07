@@ -51,7 +51,18 @@ import JobCard from "../widgets/JobCard.astro";
 
     .section-title {
         margin-top: 16rem;
-        font-size: 4.5rem;
-        font-weight: 800;
     }
+
+    @media (max-width: 768px) {
+        .section-title {
+            margin-top: 8rem;
+        }
+
+        .experience-container {
+            margin-bottom: 0rem;
+        }
+        
+    }
+
+
 </style>

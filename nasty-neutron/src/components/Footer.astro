@@ -1,0 +1,52 @@
+---
+import LinkedIn from '../svg/LinkedIn.astro';
+import Gmail from '../svg/Gmail.astro';
+---
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-navigation">
+            <a href="https://twitter.com/tuUsuario" target="_blank"><Gmail/></a>
+            <p class="copyright">© 2024 César Pagán - Todos los derechos reservados.</p>
+            <a href="https://linkedin.com/in/cesarpaganv" target="_blank"><LinkedIn/></a>
+        </div>
+    </div>
+</footer>
+
+<style>
+
+.footer {
+    background-color: #131416;
+    color: white;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-navigation {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-navigation a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    height: auto;
+    margin-right: 0.5rem;
+    width: 30px;
+    transition: transform 0.3s ease; 
+}
+
+</style>

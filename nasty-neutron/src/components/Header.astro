@@ -1,8 +1,6 @@
 ---
-import DarkLightSwitch from '../widgets/DarkLightSwitch.astro';
-const logoIconPath = '/assets/logo-darkmode.png';
-const spainFlagPath = '/assets/spain.png';
-const ukFlagPath = '/assets/uk.png';
+import Switch from '../widgets/Switch.astro';
+const logoIconPath = '/assets/header/logo-darkmode2.png';
 ---
 
 <header class="header">
@@ -11,21 +9,20 @@ const ukFlagPath = '/assets/uk.png';
             <img src={logoIconPath} alt="Logo" />
         </a>
         <div class="navigation-right">
+            <a href="#intro">Inicio</a>
             <a href="#about-me">Sobre mí</a>
             <a href="#experience">Experiencia</a>
             <a href="#projects">Proyectos</a>
             <a href="#education">Educación</a>
             <a href="#contact">Contacto</a>
-            <DarkLightSwitch />
-            <button id="lang-en">
-                <img src={ukFlagPath} alt="Toggle Spanish/English Language" />
-            </button>
+            <div class="navigation-switch">
+                <Switch />
+            </div>
         </div>
     </div>
 </header>
 
 <style>
-
 .header {
     position: fixed;
     top: 0;
@@ -87,6 +84,26 @@ const ukFlagPath = '/assets/uk.png';
 .navigation-right a:hover, .navigation-right button:hover {
     transform: translateY(-2px);
     color: #427bff;
+}
+
+
+@media (max-width: 768px) {
+    .navigation-right a {
+        display: none;
+    }
+
+    .navigation-switch {
+        display: flex;
+    }
+
+    .header {
+        justify-content: space-between; 
+        padding: 1rem; 
+    }
+
+    .logo img {
+        height: 4rem;
+    }
 }
 
 </style>

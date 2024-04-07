@@ -1,10 +1,10 @@
 ---
-const linkedInIconPath = '/assets/linkedin-darkmode.png';
-const gitHubIconPath = '/assets/github-darkmode.png';
-const cvIconPath = '/assets/cv-darkmode.png';
+const linkedInIconPath = "/assets/header/linkedin-darkmode.png";
+const gitHubIconPath = "/assets/header/github-darkmode.png";
+const cvIconPath = "/assets/header/cv-darkmode.png";
 ---
 
-<div class="intro">
+<div id="intro" class="intro">
     <h1>César Pagán</h1>
     <h2>Ingeniero de Software</h2>
     <div class="row">
@@ -16,7 +16,10 @@ const cvIconPath = '/assets/cv-darkmode.png';
             <img src={gitHubIconPath} alt="GitHub" />
             <span>GitHub</span>
         </a>
-        <a href="https://drive.google.com/file/d/1I9PHgZIUCRDernJl5Io0niXtUaD9PMp3/view?usp=sharing" target="_blank">
+        <a
+            href="https://drive.google.com/file/d/1I9PHgZIUCRDernJl5Io0niXtUaD9PMp3/view?usp=sharing"
+            target="_blank"
+        >
             <img src={cvIconPath} alt="GitHub" />
             <span>Currículum</span>
         </a>
@@ -27,7 +30,7 @@ const cvIconPath = '/assets/cv-darkmode.png';
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 5px; 
+        gap: 5px;
         text-align: center;
         margin-top: 12rem;
         margin-bottom: 7rem;
@@ -47,38 +50,53 @@ const cvIconPath = '/assets/cv-darkmode.png';
 
     .row {
         display: flex;
-        justify-content: center; 
+        justify-content: center;
         gap: 3.25rem;
-        flex-wrap: wrap; 
-        margin-top: 1rem; 
+        flex-wrap: wrap;
+        margin-top: 1rem;
     }
 
     .row a {
         display: flex;
-        align-items: center; 
+        align-items: center;
         text-decoration: none;
-        transition: transform 0.3s ease, opacity 0.3s ease; 
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
     }
 
     .row a:hover {
-        transform: scale(1.05); 
+        transform: scale(1.05);
     }
 
     .row img {
         height: 2.75rem;
         margin-right: 0.5rem;
         width: auto;
-        transition: transform 0.3s ease; 
+        transition: transform 0.3s ease;
     }
 
     .row span {
         font-size: 0.95rem;
         opacity: 0.55;
-        transition: opacity 0.3s ease; 
+        transition: opacity 0.3s ease;
     }
 
     .row a:hover span {
         opacity: 1;
     }
 
+    @media (max-width: 768px) {
+        .intro h1 {
+            font-size: 3rem;
+        }
+
+        .intro h2 {
+            font-size: 2rem;
+        }
+
+        .row {
+            gap: 2rem;
+        }
+    }
 </style>
