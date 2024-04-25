@@ -40,9 +40,7 @@ const technologyComponents = {
             <strong>{job.title}</strong>
             {job.company === 'Verdementa' && <Verdementa />}
             {job.company === 'Ayuntamiento de Cartagena' && <AytoCartagena />}
-            <!-- <strong className={job.company === 'Verdementa' ? 'company-verdementa' : job.company === 'Ayuntamiento de Cartagena' ? 'company-aytocartagena' : ''}> -->
             <strong>{job.company}</strong>
-            <!-- </strong> -->
             <strong>{job.period}</strong>
             <div class="technologies">
               {job.technologies.map((tech) => {
@@ -79,12 +77,6 @@ const technologyComponents = {
         </div>
       </div>
     </div>
-    <!-- <div class="technologies">
-      {job.technologies.map((tech, index, array) => {
-      const TechComponent = technologyComponents[tech];
-      return <TechComponent />; 
-      })}
-    </div> -->
 </div>
 
 <style>
@@ -99,19 +91,6 @@ const technologyComponents = {
   padding: 10px 0; 
   background-color: transparent; 
 }
-
-/* .technologies {
-  width: 100%; 
-  display: flex;
-  flex-direction: row; 
-  justify-content: center;
-  align-items: center;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  gap: 10px;
-  padding: 10px 100px;
-  background-color: #0f0e0e; 
-} */
 
 .pre-line {
   white-space: pre-line;
@@ -131,15 +110,6 @@ const technologyComponents = {
   box-shadow: 0px 0px 10px 1px #000000ee;
   border-radius: 5px;
 }
-
-.company-verdementa {
-    color: rgb(21, 180, 21);
-}
-
-.company-aytocartagena {
-    color: orange;
-}
-
 
 .front, .back {
   background-color: #151515;
@@ -338,15 +308,10 @@ const technologyComponents = {
       font-size: 14px;
     }
 
-    .circle, #bottom, #right {
-        display: none; 
-    }
-
-    .technologies svg {
-        width: 30px;
-        height: 30px; 
-    }
+    .technologies {
+      width: calc(100% - 20px);
+  }
+    
 
 }
-
 </style>

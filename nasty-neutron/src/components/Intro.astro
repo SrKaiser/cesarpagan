@@ -1,7 +1,7 @@
 ---
-const linkedInIconPath = "/assets/header/linkedin-darkmode.png";
-const gitHubIconPath = "/assets/header/github-darkmode.png";
-const cvIconPath = "/assets/header/cv-darkmode.png";
+import LinkedIn from '../svg/LinkedIn.astro';
+import GitHub from '../svg/GitHub.astro';
+import CV from '../svg/CV.astro';
 ---
 
 <div id="intro" class="intro">
@@ -9,22 +9,26 @@ const cvIconPath = "/assets/header/cv-darkmode.png";
     <h2>Ingeniero de Software</h2>
     <div class="row">
         <a href="https://www.linkedin.com/in/cesarpaganv/" target="_blank">
-            <img src={linkedInIconPath} alt="LinkedIn" />
-            <span>LinkedIn</span>
+            <div class="icon-text">
+                <LinkedIn/>
+                <span>LinkedIn</span>
+            </div>
         </a>
         <a href="https://github.com/SrKaiser" target="_blank">
-            <img src={gitHubIconPath} alt="GitHub" />
-            <span>GitHub</span>
+            <div class="icon-text">
+                <GitHub/>
+                <span>GitHub</span>
+            </div>
         </a>
-        <a
-            href="https://drive.google.com/file/d/1I9PHgZIUCRDernJl5Io0niXtUaD9PMp3/view?usp=sharing"
-            target="_blank"
-        >
-            <img src={cvIconPath} alt="GitHub" />
-            <span>Currículum</span>
+        <a href="https://drive.google.com/file/d/1I9PHgZIUCRDernJl5Io0niXtUaD9PMp3/view?usp=sharing" target="_blank">
+            <div class="icon-text">
+                <CV/>
+                <span>Currículum</span>
+            </div>
         </a>
     </div>
 </div>
+
 <style>
     .intro {
         display: flex;
@@ -57,29 +61,26 @@ const cvIconPath = "/assets/header/cv-darkmode.png";
     }
 
     .row a {
+        font-weight: bold;
+        margin-right: 0.5rem;
+        transition: transform 0.3s ease; 
+        
+    }
+
+    .icon-text {
         display: flex;
-        align-items: center;
-        text-decoration: none;
-        transition:
-            transform 0.3s ease,
-            opacity 0.3s ease;
+        align-items: center; 
     }
 
     .row a:hover {
         transform: scale(1.05);
     }
 
-    .row img {
-        height: 2.75rem;
-        margin-right: 0.5rem;
-        width: auto;
-        transition: transform 0.3s ease;
-    }
-
     .row span {
         font-size: 0.95rem;
         opacity: 0.55;
         transition: opacity 0.3s ease;
+        margin-left: 8px;
     }
 
     .row a:hover span {
