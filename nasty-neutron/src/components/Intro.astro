@@ -5,8 +5,11 @@ import CV from '../svg/CV.astro';
 ---
 
 <div id="intro" class="intro">
+    <!-- <img src='/assets/me.jpeg' alt="César Pagán" class="profile-pic"> -->
+    <img src='/assets/profile-pic.png' alt="César Pagán" class="profile-pic">
     <h1>César Pagán</h1>
     <h2>Ingeniero de Software</h2>
+    <h3>Pasión por la tecnología, compromiso con la excelencia.</h3>
     <div class="row">
         <a href="https://www.linkedin.com/in/cesarpaganv/" target="_blank">
             <div class="icon-text">
@@ -34,10 +37,16 @@ import CV from '../svg/CV.astro';
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 5px;
         text-align: center;
-        margin-top: 12rem;
-        margin-bottom: 7rem;
+        margin-top: 8rem;
+    }
+    
+    .profile-pic {
+        width: 220px; 
+        height: auto; 
+        border-radius: 50%;
+        border: 3px solid #0f0f0f;; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
     }
 
     h1 {
@@ -50,6 +59,15 @@ import CV from '../svg/CV.astro';
         font-weight: 600;
         color: #427bff;
         position: relative;
+    }
+
+    h3 {
+        font-size: 2rem;
+        font-weight: 500;
+        opacity: 0.7;
+        margin-top: 1rem;;
+        position: relative;
+        margin-bottom: 1rem;
     }
 
     .row {
@@ -92,16 +110,39 @@ import CV from '../svg/CV.astro';
             margin-bottom: 13rem;
         }
 
+        .profile-pic {
+            width: 150px; 
+        }
+
         .intro h1 {
             font-size: 3rem;
         }
 
         .intro h2 {
-            font-size: 2rem;
+            font-size: 1.75rem;
         }
 
-        .row {
-            gap: 2rem;
+        .intro h3 {
+            font-size: 1rem;
         }
+
+        
+        .row {
+            flex-wrap: wrap;
+        }
+
+        .row a{
+            margin-right: 0px;
+        }
+
+        .icon-text {
+            transform: scale(1);
+            margin-right: 0px;
+        }
+
+        .icon-text span{
+            font-size: 0.85rem;
+        }
+
     }
 </style>
