@@ -19,10 +19,6 @@ let currentLanguage = localStorage.getItem('language') || 'spanish';
 setLanguage(currentLanguage);
 
 function setLanguage(language) {
-    const languagePrefix = language === 'spanish' ? 'es' : 'en';
-    history.pushState({ path: `/${languagePrefix}/` }, '', `/${languagePrefix}/`);
-
-    currentLanguage = language;
     localStorage.setItem('language', language);
 
     introSection(language);
@@ -37,12 +33,6 @@ function setLanguage(language) {
     document.getElementById('language-container').style.display = language === 'spanish' ? 'flex' : 'none';
     document.getElementById('language-container2').style.display = language === 'english' ? 'flex' : 'none';
 }
-
-window.addEventListener('popstate', function (event) {
-    if (event.state && event.state.path) {
-        setLanguage(event.state.path.includes('/en/') ? 'english' : 'spanish');
-    }
-});
 
 function introSection(language){
     document.getElementById('name').textContent = 'César Pagán';
