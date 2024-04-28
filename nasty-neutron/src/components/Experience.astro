@@ -1,22 +1,41 @@
 ---
 const jobs = [
     {
-        title: "Desarrollador Full-Stack",
+        title: {
+            es: "Desarrollador Full-Stack",
+            en: "Full-Stack Developer"
+        },
         company: "Verdementa",
-        description: "Desarrollador Full-Stack sobre la web de Verdementa con Django, Postgres y Redis, integrando funcionalidades front-end con tecnologías como JavaScript, HTML, CSS y Bootstrap.",
-        period: "Octubre 2023 - Presente",
+        description: {
+            es: "Desarrollador Full-Stack sobre la web de Verdementa con Django, Postgres y Redis, integrando funcionalidades front-end con tecnologías como JavaScript, HTML, CSS y Bootstrap.",
+            en: "Full-Stack Developer at Verdementa using Django, Postgres, and Redis, integrating front-end functionalities with technologies like JavaScript, HTML, CSS, and Bootstrap."
+        },
+        period: {
+            es: "Octubre 2023 - Presente",
+            en: "October 2023 - Present"
+        },
         color: "#54b948",
         technologies: ["Django", "Python", "PostgreSQL", "Redis", "Javascript", "HTML", "Bootstrap", "CSS"], 
     },
     {
-        title: "Desarrollador Full-Stack y Soporte Técnico",
+        title: {
+            es: "Desarrollador Full-Stack y Soporte Técnico",
+            en: "Full-Stack Developer and Technical Support"
+        },
         company: "Ayuntamiento de Cartagena",
-        description: "Contrato de prácticas currículares.\n\nDesarrollo de aplicaciones web con ASP.NET MVC y móviles Xamarin.Forms. (C#, HTML, XML y JavaScript).\n\nResolución de incidencias y preparación y montaje de ordenadores para empleados.",
-        period: "Julio 2022 - Agosto 2022",
+        description: {
+            es: "Contrato de prácticas currículares. Desarrollo de aplicaciones web con ASP.NET MVC y móviles Xamarin.Forms. (C#, HTML, XML y JavaScript). Resolución de incidencias y preparación y montaje de ordenadores para empleados.",
+            en: "Curricular internship contract. Development of web applications with ASP.NET MVC and mobile apps with Xamarin.Forms. (C#, HTML, XML, and JavaScript). Troubleshooting and setting up computers for employees."
+        },
+        period: {
+            es: "Julio 2022 - Agosto 2022",
+            en: "July 2022 - August 2022"
+        },
         color: "#378baf",
         technologies: ["ASPNet", "Xamarin", "CSharp", "Javascript", "HTML", "CSS", "XML"],
     },
 ];
+
 
 import JobCard from "../widgets/JobCard.astro";
 ---
@@ -34,7 +53,6 @@ import JobCard from "../widgets/JobCard.astro";
     .experience {
         text-align: center;
         padding: 50px 0; 
-        background-color: #151515; 
     }
 
     .experience-container {

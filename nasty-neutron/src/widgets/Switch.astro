@@ -11,16 +11,13 @@
 
 
 <style>
-  /* switch settings 👇 */
 
 .ui-switch {
-  /* switch */
-  --switch-bg: rgb(135, 150, 165);
+  --switch-bg: #7aa0fa;
   --switch-width: 70px;
   --switch-height: 20px;
-  /* circle */
   --circle-diameter: 32px;
-  --circle-bg: #3d3d3d;
+  --circle-bg: var(--card-color);
   --circle-inset: calc((var(--circle-diameter) - var(--switch-height)) / 2);
 }
 
@@ -29,8 +26,6 @@
 }
 
 .slider {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   width: var(--switch-width);
   height: var(--switch-height);
@@ -80,12 +75,11 @@
   opacity: 0;
 }
 
-/* actions */
-
-.ui-switch input:checked+.slider .circle {
+.ui-switch input:checked + .slider .circle {
   left: calc(100% - var(--circle-diameter));
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjAiIHdpZHRoPSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiCiAgICAgICAgZD0iTTQuMiAyLjVsLS43IDEuOC0xLjguNyAxLjguNy43IDEuOC42LTEuOEw2LjcgNWwtMS45LS43LS42LTEuOHptMTUgOC4zYTYuNyA2LjcgMCAxMS02LjYtNi42IDUuOCA1LjggMCAwMDYuNiA2LjZ6IiAvPgo8L3N2Zz4=");
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjAiIHdpZHRoPSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiMwMDAiCiAgICAgICAgZD0iTTQuMiAyLjVsLS43IDEuOC0xLjguNyAxLjguNy43IDEuOC42LTEuOEw2LjcgNWwtMS45LS43LS42LTEuOHptMTUgOC4zYTYuNyA2LjcgMCAxMS02LjYtNi42IDUuOCA1LjggMCAwMDYuNiA2LjZ6IiAvPgo8L3N2Zz4=");
 }
+
 
 .ui-switch input:active+.slider .circle::before {
   -webkit-transition: 0s;

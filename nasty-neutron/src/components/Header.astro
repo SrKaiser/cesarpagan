@@ -6,17 +6,17 @@ import Switch from '../widgets/Switch.astro';
     <div class="header-content">
         <div class="menu-toggle">
             <span class="hamburger"></span>
-        </div>        
+        </div>
         <div class="navigation-switch">
             <Switch />
         </div>
         <div class="navigation-right">
-            <a href="#intro">Inicio</a>
-            <a href="#about-me">Sobre mí</a>
-            <a href="#experience">Experiencia</a>
-            <a href="#projects">Proyectos</a>
-            <a href="#education">Educación</a>
-            <a href="#contact">Contacto</a>
+            <a href="#intro" id="link-home">Inicio</a>
+            <a href="#about-me" id="link-about">Sobre mí</a>
+            <a href="#experience" id="link-experience">Experiencia</a>
+            <a href="#projects" id="link-projects">Proyectos</a>
+            <a href="#education" id="link-education">Educación</a>
+            <a href="#contact" id="link-contact">Contacto</a>
         </div>
     </div>
 </header>
@@ -26,7 +26,7 @@ import Switch from '../widgets/Switch.astro';
     position: fixed;
     top: 0;
     z-index: 1000;
-    background-color: #131416ac;
+    background-color: var(--header-color);
     width: 100%;
     height: 5.25rem;
     display: flex;
@@ -75,7 +75,7 @@ import Switch from '../widgets/Switch.astro';
 .navigation-right a {
     margin-right: 15px;
     font-weight: bold;
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     font-size: 1.15rem;
     position: relative;

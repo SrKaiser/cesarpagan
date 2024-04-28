@@ -4,13 +4,23 @@ import UK from "../svg/UK.astro";
 ---
 
 <div class="language-switch">
-    <div class="languages">
-        <div class="icon-text">
-            <Spain/> <span>Español</span>
+    <div class="languages" id="language-container">
+        <div class="icon-text" id="spanish-select">
+            <Spain/> <span id="spanish-text">Español</span>
         </div>
         <div class="separator"></div>
-        <div class="icon-text">
-            <UK/> <span>English</span>
+        <div class="icon-text" id="english-select">
+            <UK/> <span id="english-text">English</span>
+        </div>
+    </div>
+
+    <div class="languages" id="language-container2">
+        <div class="icon-text" id="english-select2">
+            <UK/> <span id="english-text">English</span>
+        </div>
+        <div class="separator"></div>
+        <div class="icon-text" id="spanish-select2">
+            <Spain/> <span id="spanish-text">Español</span>
         </div>
     </div>
 </div>
@@ -21,7 +31,7 @@ import UK from "../svg/UK.astro";
     margin-left: 2.5rem;
     border-top-left-radius: 15%;
     border-top-right-radius: 15%;
-    background-color: #151515;
+    background-color: var(--header-color);
     padding: 10px;
     width: 140px;
     height: 75px;
@@ -30,8 +40,7 @@ import UK from "../svg/UK.astro";
     left: 0;
     position: fixed;
     transition: bottom 0.3s ease;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);  */
-    box-shadow: -1px -3px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: -1px -3px 8px var(--background-color-shadow);
 }
 
 .language-switch:hover {
@@ -45,6 +54,7 @@ import UK from "../svg/UK.astro";
 }
 
 .icon-text {
+    cursor: pointer;
     display: flex;
     align-items: center; 
     margin-bottom: 0.25rem;

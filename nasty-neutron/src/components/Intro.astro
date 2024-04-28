@@ -7,9 +7,9 @@ import CV from '../svg/CV.astro';
 <div id="intro" class="intro">
     <!-- <img src='/assets/me.jpeg' alt="César Pagán" class="profile-pic"> -->
     <img src='/assets/profile-pic.png' alt="César Pagán" class="profile-pic">
-    <h1>César Pagán</h1>
-    <h2>Ingeniero de Software</h2>
-    <h3>Pasión por la tecnología, compromiso con la excelencia.</h3>
+    <h1 id="name">César Pagán</h1>
+    <h2 id="title">Ingeniero de Software</h2>
+    <h3 id="motto">Pasión por la tecnología, compromiso con la excelencia.</h3>
     <div class="row">
         <a href="https://www.linkedin.com/in/cesarpaganv/" target="_blank">
             <div class="icon-text">
@@ -45,7 +45,7 @@ import CV from '../svg/CV.astro';
         width: 220px; 
         height: auto; 
         border-radius: 50%;
-        border: 3px solid #0f0f0f;; 
+        border: 3px solid var(--background-color); 
         box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
     }
 
