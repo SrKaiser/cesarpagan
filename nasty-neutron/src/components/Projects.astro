@@ -38,7 +38,7 @@ import ProjectCard from "../widgets/ProjectCard.astro";
 
 <section id="projects" class="projects">
     <div>
-        <h1 class="section-title text-center">Proyectos</h1>
+        <h1 class="section-title text-center" id="project-title">Proyectos</h1>
         <div class="projects-container">
             {projects.map((project) => <ProjectCard project={project} key={project.title} />)}
         </div>
