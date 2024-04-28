@@ -1,5 +1,5 @@
 ---
-const { school } = Astro.props;
+const { school, language } = Astro.props;
 
 import Flutter from '../svg/tech/Flutter.astro';
 import Firebase from '../svg/tech/Firebase.astro';
@@ -15,14 +15,14 @@ const technologyComponents = {
 <div class="card">
     <div class="card2">
         <div class="image-container">
-            <img src={school.image} alt={`Imagen de ${school.title}`} />
+            <img src={school.image} alt={`Imagen de ${school.title[language]}`} />
         </div>
         <div class="info-container">
             <div class="content">
-                <h2>{school.title}</h2>
-                <h3>{school.subtitle}</h3>
-                <p class="period">{school.period}</p>
-                <p class="description">{school.description}</p>
+                <h2>{school.title[language]}</h2>
+                <h3>{school.subtitle[language]}</h3>
+                <p class="period">{school.period[language]}</p>
+                <p class="description">{school.description[language]}</p>
                 <hr class="divider" />
             </div>
         </div>

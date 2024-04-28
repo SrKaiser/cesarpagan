@@ -1,12 +1,14 @@
 ---
+const { currentLanguage } = Astro.props;
+
 import Spain from "../svg/Spain.astro";
 import UK from "../svg/UK.astro";
 ---
 
 <div class="language-switch">
-    <div class="languages" id="language-container">
+    <div class="languages" id="language-container" style={{ display: currentLanguage === 'spanish' ? 'flex' : 'none' }}>
         <div class="icon-text" id="spanish-select">
-            <Spain/> <span id="spanish-text" data-language="spanish" >Español</span>
+            <Spain/> <span id="spanish-text" data-language="spanish">Español</span>
         </div>
         <div class="separator"></div>
         <div class="icon-text" id="english-select">
@@ -14,7 +16,7 @@ import UK from "../svg/UK.astro";
         </div>
     </div>
 
-    <div class="languages" id="language-container2">
+    <div class="languages" id="language-container2" style={{ display: currentLanguage === 'english' ? 'flex' : 'none' }}>
         <div class="icon-text" id="english-select2">
             <UK/> <span id="english-text" data-language="english">English</span>
         </div>
@@ -24,6 +26,7 @@ import UK from "../svg/UK.astro";
         </div>
     </div>
 </div>
+
 
 <style>
 

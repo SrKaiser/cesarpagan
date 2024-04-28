@@ -1,23 +1,37 @@
 ---
 const schools = [
     {
-        title: "Universidad de Murcia - Facultad de Informática",
-        subtitle: "Grado en Ingenería Informática - Mención en Software",
-        period: "Septiembre 2019 - Junio 2023",
-        description: "Mi paso por la Universidad marcó el inicio de mi carrera, 4 años donde mi formación trascendió el mero aprendizaje de programación. Sumergiéndome en el vasto mundo de la Informática, adquirí conocimientos en Computación, Redes, Sistemas Operativos, Matemáticas y sobre todo en el mundo del Software. Esta diversidad de materias no solo me forjó como un Ingeniero de Software, sino que también afianzó mi versatilidad y mi capacidad para adaptarme y innovar en el cambiante panorama tecnológico. ",
+        title: {
+            spanish: "Universidad de Murcia - Facultad de Informática",
+            english: "University of Murcia - School of Computer Science",
+        },
+        subtitle: {
+            spanish: "Grado en Ingenería Informática - Mención en Software",
+            english: "Bachelor in Computer Science - Software Major",
+        },
+        period:
+        {
+            spanish: "Septiembre 2019 - Junio 2023,",
+            english: "September 2019 - June 2023,",
+        }, 
+        description: {
+            spanish: "Mi paso por la Universidad marcó el inicio de mi carrera, 4 años donde mi formación trascendió el mero aprendizaje de programación. Sumergiéndome en el vasto mundo de la Informática, adquirí conocimientos en Computación, Redes, Sistemas Operativos, Matemáticas y sobre todo en el mundo del Software. Esta diversidad de materias no solo me forjó como un Ingeniero de Software, sino que también afianzó mi versatilidad y mi capacidad para adaptarme y innovar en el cambiante panorama tecnológico. ",
+            english: "My time at the University marked the beginning of my career, four years where my education transcended mere programming learning. Immersing myself in the vast world of Computer Science, I acquired knowledge in Computing, Networks, Operating Systems, Mathematics, and above all in the realm of Software. This diversity of subjects not only shaped me as a Software Engineer but also strengthened my versatility and my ability to adapt and innovate in the ever-changing technological landscape.",
+        },
         image: "/assets/education/UMU.jpg",
         technologies: ["Flutter", "Dart", "Firebase"], 
     },
 ];
-
 import EducationCard from "../widgets/EducationCard.astro";
+
+const { currentLanguage } = Astro.props;
 ---
 
 <section id="education" class="education">
     <div>
-        <h1 class="section-title text-center" id="education-title">Educación</h1>
+        <h1 class="section-title text-center" id="education-title">{currentLanguage === 'spanish' ? 'Educación' : 'Education'}</h1>
         <div class="education-container">
-            {schools.map((school) => <EducationCard school={school} key={school.title} />)}
+            {schools.map((school) => <EducationCard school={school} key={school.title} language={currentLanguage}/>)}
         </div>
     </div>
 </section>

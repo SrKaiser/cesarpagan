@@ -1,5 +1,5 @@
 ---
-const { job } = Astro.props;
+const { job, language } = Astro.props;
 import Verdementa from "../svg/Verdementa.astro";
 import AytoCartagena from "../svg/AytoCartagena.astro";
 
@@ -31,20 +31,17 @@ const technologyComponents = {
   XML: XML,
 };
 
-// Obtén la URL completa
-let currentLanguage = 'spanish';
-
 ---
 <div class="card">
   <div class="content">
     <div class="back">
       <div class="back-content">
-          <strong data-job-title>{job.title[currentLanguage]}</strong>
-          {job.company[currentLanguage] === "Verdementa" && <Verdementa />}
-          {job.company[currentLanguage] === "Ayuntamiento de Cartagena" && <AytoCartagena />}
-          {job.company[currentLanguage] === "Cartagena City Council" && <AytoCartagena />}
-          <strong data-job-company>{job.company[currentLanguage]}</strong>
-          <strong data-job-period>{job.period[currentLanguage]}</strong>
+          <strong data-job-title>{job.title[language]}</strong>
+          {job.company[language] === "Verdementa" && <Verdementa />}
+          {job.company[language] === "Ayuntamiento de Cartagena" && <AytoCartagena />}
+          {job.company[language] === "Cartagena City Council" && <AytoCartagena />}
+          <strong data-job-company>{job.company[language]}</strong>
+          <strong data-job-period>{job.period[language]}</strong>
           <div class="technologies">
               {job.technologies.map((tech) => {
                   const TechComponent = technologyComponents[tech];
@@ -61,16 +58,16 @@ let currentLanguage = 'spanish';
       </div>
 
       <div class="front-content">
-        <small class="badge">{job.company[currentLanguage]}</small>
+        <small class="badge">{job.company[language]}</small>
         <div class="pre-line">
-          {job.description[currentLanguage]}
+          {job.description[language]}
         </div>
         <div class="description">
           <div class="title">
-            <strong>{job.title[currentLanguage]}</strong>
+            <strong>{job.title[language]}</strong>
           </div>
           <p class="card-footer">
-            {job.period[currentLanguage]}
+            {job.period[language]}
           </p>
         </div>
       </div>

@@ -1,5 +1,6 @@
 ---
 import Switch from '../widgets/Switch.astro';
+const { currentLanguage } = Astro.props;
 ---
 
 <header class="header">
@@ -11,15 +12,16 @@ import Switch from '../widgets/Switch.astro';
             <Switch />
         </div>
         <div class="navigation-right">
-            <a href="#intro" id="link-home">Inicio</a>
-            <a href="#about-me" id="link-about">Sobre mí</a>
-            <a href="#experience" id="link-experience">Experiencia</a>
-            <a href="#projects" id="link-projects">Proyectos</a>
-            <a href="#education" id="link-education">Educación</a>
-            <a href="#contact" id="link-contact">Contacto</a>
+            <a href="#intro" id="link-home">{currentLanguage === 'spanish' ? 'Inicio' : 'Home'}</a>
+            <a href="#about-me" id="link-about">{currentLanguage === 'spanish' ? 'Sobre mí' : 'About Me'}</a>
+            <a href="#experience" id="link-experience">{currentLanguage === 'spanish' ? 'Experiencia' : 'Experience'}</a>
+            <a href="#projects" id="link-projects">{currentLanguage === 'spanish' ? 'Proyectos' : 'Projects'}</a>
+            <a href="#education" id="link-education">{currentLanguage === 'spanish' ? 'Educación' : 'Education'}</a>
+            <a href="#contact" id="link-contact">{currentLanguage === 'spanish' ? 'Contacto' : 'Contact'}</a>
         </div>
     </div>
 </header>
+
 
 <style>
 .header {

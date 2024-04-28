@@ -1,5 +1,5 @@
 ---
-const { project } = Astro.props;
+const { project, language } = Astro.props;
 import Flutter from '../svg/tech/Flutter.astro';
 import Firebase from '../svg/tech/Firebase.astro';
 import Java from '../svg/tech/Java.astro';
@@ -29,12 +29,12 @@ const technologyComponents = {
 <div class="card-container" style={{ backgroundImage: `url(${project.image})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
     <div class="card">
         <div class="front-content">
-            <p>{project.title}</p>
+            <p>{project.title[language]}</p>
         </div>
         <div class="content">
-            <p class="heading">{project.title}</p>
+            <p class="heading">{project.title[language]}</p>
             <p>
-                {project.description}
+                {project.description[language]}
             </p>
             <div class="buttons-row">
                 {project.video && (

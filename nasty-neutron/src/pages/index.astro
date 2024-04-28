@@ -10,17 +10,21 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import LanguageSwitch from '../components/LanguageSwitch.astro';
 
+import { Astro } from 'astro/server';
+
+const url = new URL(Astro.request.url);
+let currentLanguage = url.searchParams.get('lang') || 'spanish';
 ---
 
 <Layout title="César Pagán | Ingeniero de Software">
     <main>
-        <Header/>
-        <Intro/>
-        <AboutMe/>
-        <Experience/>
-        <Projects/>
-        <Education/>
-        <Contact/>
-        <Footer/>
-        <!-- <LanguageSwitch/> -->
+        <Header currentLanguage={currentLanguage}/>
+        <Intro currentLanguage={currentLanguage}/>
+        <AboutMe currentLanguage={currentLanguage}/>
+        <Experience currentLanguage={currentLanguage}/>
+        <Projects currentLanguage={currentLanguage}/>
+        <Education currentLanguage={currentLanguage}/>
+        <Contact currentLanguage={currentLanguage}/>
+        <Footer currentLanguage={currentLanguage}/>
+        <LanguageSwitch currentLanguage={currentLanguage}/>
     </main>

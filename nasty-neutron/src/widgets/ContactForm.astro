@@ -1,11 +1,11 @@
 ---
-
+const { language } = Astro.props;
 ---
 
 <div class="form-container">
   <form id="contact-form" class="form">
     <div class="form-group">
-      <label for="from_name" id="form-name">Nombre</label>
+      <label for="from_name" id="form-name">{language === 'spanish' ? 'Nombre': 'Name'}</label>
       <input type="text" id="from_name" name="from_name" required="" />
     </div>
     <div class="form-group">
@@ -13,15 +13,15 @@
       <input type="text" id="email_id" name="email_id" required="" />
     </div>
     <div class="form-group">
-      <label for="message" id="form-message">¿Qué me quieres decir?</label>
+      <label for="message" id="form-message">{language === 'spanish' ? '¿Qué me quieres decir?': 'What do you want to tell me? '}</label>
       <textarea name="message" id="message" rows="10" cols="50" required=""
       ></textarea>
     </div>
-    <button id="form-button" class="form-submit-btn" type="submit">Enviar</button>
+    <button id="form-button" class="form-submit-btn" type="submit">{language === 'spanish' ? 'Enviar': 'Send'}</button>
   </form>
 </div>
 <div id="alert-box" class="alert-box">
-  <p id="alert-text">¡Email enviado con éxito!</p>
+  <p id="alert-text">{language === 'spanish' ? '¡Email enviado con éxito!': 'Email sent succesfully!'}</p>
 </div>
 
 

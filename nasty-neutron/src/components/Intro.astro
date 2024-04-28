@@ -2,14 +2,14 @@
 import LinkedIn from '../svg/LinkedIn.astro';
 import GitHub from '../svg/GitHub.astro';
 import CV from '../svg/CV.astro';
+const { currentLanguage } = Astro.props;
 ---
 
 <div id="intro" class="intro">
-    <!-- <img src='/assets/me.jpeg' alt="César Pagán" class="profile-pic"> -->
     <img src='/assets/profile-pic.png' alt="César Pagán" class="profile-pic">
     <h1 id="name">César Pagán</h1>
-    <h2 id="title">Ingeniero de Software</h2>
-    <h3 id="motto">Pasión por la tecnología, compromiso con la excelencia.</h3>
+    <h2 id="title">{currentLanguage === 'spanish' ? 'Ingeniero de Software' : 'Software Engineer'}</h2>
+    <h3 id="motto">{currentLanguage === 'spanish' ? 'Pasión por la tecnología, compromiso con la excelencia.' : 'Passion for technology, commitment to excellence.'}</h3>
     <div class="row">
         <a href="https://www.linkedin.com/in/cesarpaganv/" target="_blank">
             <div class="icon-text">
@@ -26,11 +26,12 @@ import CV from '../svg/CV.astro';
         <a href="https://drive.google.com/file/d/1I9PHgZIUCRDernJl5Io0niXtUaD9PMp3/view?usp=sharing" target="_blank">
             <div class="icon-text">
                 <CV/>
-                <span>Currículum</span>
+                <span>{currentLanguage === 'spanish' ? 'Currículum' : 'Resume'}</span>
             </div>
         </a>
     </div>
 </div>
+
 
 <style>
     .intro {

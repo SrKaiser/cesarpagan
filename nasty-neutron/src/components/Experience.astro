@@ -51,9 +51,9 @@ const { currentLanguage } = Astro.props;
 
 <section id="experience" class="experience">
     <div>
-        <h1 class="section-title" id="experience-title"> Experiencia </h1>
+        <h1 class="section-title" id="experience-title"> {currentLanguage === 'spanish' ? 'Experiencia' : 'Experience'} </h1>
         <div class="experience-container">
-            {jobs.map((job) => <JobCard job={job} key={job.company} currentLanguage={currentLanguage}/>)}
+            {jobs.map((job) => <JobCard job={job} key={job.company} language={currentLanguage}/>)}
         </div>
     </div>
 </section>

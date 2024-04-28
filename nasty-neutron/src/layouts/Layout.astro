@@ -73,11 +73,13 @@ const { title } = Astro.props;
 	}
 
 	html {
-		background: var(--background-color);
+		background-color: var(--background-color);
 		color: var(--text-color);
 		font-family: "Merriweather Sans", sans-serif;
 		scroll-behavior: smooth;
+		z-index: -2;
 	}
+
 
 	* {
 		scrollbar-width: thin; 

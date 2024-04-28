@@ -4,6 +4,7 @@ import Learning from "../svg/softskills/Learning.astro";
 import Comunication from "../svg/softskills/Comunication.astro";
 import Adaptability from "../svg/softskills/Adaptability.astro";
 import Proactivity from "../svg/softskills/Proactivity.astro";
+const { currentLanguage } = Astro.props;
 ---
 
 <section id="about-me" class="about-me">
@@ -11,48 +12,44 @@ import Proactivity from "../svg/softskills/Proactivity.astro";
     <div class="waves-level-2"></div>
     <div class="waves-level-3"></div>
     <div class="about-container">
-        <h1 class="section-title" id="about-title">Sobre mí</h1>
+        <h1 class="section-title" id="about-title">{currentLanguage === 'spanish' ? 'Sobre mí' : 'About Me'}</h1>
         <p class="section-text" id="about-text1">
-            Soy un Ingeniero Informático con especialización en Desarrollo de
-            Software, llevando casi un año de experiencia en Desarrollo Web
-            Full-Stack y de Aplicaciones Móviles. Mi curiosidad me lleva a
-            explorar las últimas tendencias y tecnologías, siempre buscando
-            ampliar mis horizontes y superar nuevos retos.
+            {currentLanguage === 'spanish' ?
+            'Soy un Ingeniero Informático con especialización en Desarrollo de Software, llevando casi un año de experiencia en Desarrollo Web Full-Stack y de Aplicaciones Móviles. Mi curiosidad me lleva a explorar las últimas tendencias y tecnologías, siempre buscando ampliar mis horizontes y superar nuevos retos.' :
+            'I am a Computer Engineer specializing in Software Development, with nearly a year of experience in Full-Stack Web Development and Mobile Applications. My curiosity drives me to explore the latest trends and technologies, always seeking to broaden my horizons and overcome new challenges.'}
         </p>
         <p class="section-text" id="about-text2">
-            Mi pasión por la innovación y la calidad en el desarrollo de
-            software me motiva a entregar soluciones que no solo satisfacen las
-            necesidades, sino que también ofrecen experiencias excepcionales a
-            los usuarios. Estoy comprometido con el aprendizaje continuo y el
-            crecimiento profesional, con el objetivo de estar siempre al frente
-            en esta industria de rápido avance.
+            {currentLanguage === 'spanish' ?
+            'Mi pasión por la innovación y la calidad en el desarrollo de software me motiva a entregar soluciones que no solo satisfacen las necesidades, sino que también ofrecen experiencias excepcionales a los usuarios. Estoy comprometido con el aprendizaje continuo y el crecimiento profesional, con el objetivo de estar siempre al frente en esta industria de rápido avance.' :
+            'My passion for innovation and quality in software development drives me to deliver solutions that not only meet needs but also provide exceptional experiences to users. I am committed to continuous learning and professional growth, aiming to always stay ahead in this rapidly advancing industry.'}
         </p>
-        <h1 class="section-subtitle" id="skills-title">Habilidades esenciales</h1>
+        <h1 class="section-subtitle" id="skills-title">{currentLanguage === 'spanish' ? 'Habilidades esenciales' : 'Soft Skills'}</h1>
         <div class="row">
             <div class="icon-container">
                 <Proactivity />
-                <span class="description" id="skill-1">Proactividad</span>
+                <span class="description" id="skill-1">{currentLanguage === 'spanish' ? 'Proactividad' : 'Proactivity'}</span>
             </div>
             <div class="icon-container">
                 <TeamWork />
-                <span class="description" id="skill-2">Trabajo en Equipo</span>
+                <span class="description" id="skill-2">{currentLanguage === 'spanish' ? 'Trabajo en Equipo' : 'Team Work'}</span>
             </div>
             <div class="icon-container">
                 <Learning />
-                <span class="description" id="skill-3">Aprendizaje</span>
+                <span class="description" id="skill-3">{currentLanguage === 'spanish' ? 'Aprendizaje' : 'Learning'}</span>
             </div>
             <div class="icon-container">
                 <Comunication />
-                <span class="description" id="skill-4">Comunicación</span>
+                <span class="description" id="skill-4">{currentLanguage === 'spanish' ? 'Comunicación' : 'Communication'}</span>
             </div>
             <div class="icon-container">
                 <Adaptability />
-                <span class="description" id="skill-5">Adaptabilidad</span>
+                <span class="description" id="skill-5">{currentLanguage === 'spanish' ? 'Adaptabilidad' : 'Adaptability'}</span>
             </div>
         </div>
     </div>
     <div class="waves-reverse"></div>
 </section>
+
 
 <style>
 

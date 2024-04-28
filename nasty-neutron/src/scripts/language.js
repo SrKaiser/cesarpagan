@@ -16,37 +16,14 @@ document.getElementById('spanish-select2').addEventListener('click', function() 
 
 let currentLanguage = localStorage.getItem('language') || 'spanish';
 
-setLanguage(currentLanguage);
-
 function setLanguage(language) {
     localStorage.setItem('language', language);
 
-    introSection(language);
-    headerSection(language);
-    aboutMeSection(language);
-    experienceSection(language);
-    projectSection(language);
-    educationSection(language);
-    contactSection(language);
-    footerSection(language);
-
     document.getElementById('language-container').style.display = language === 'spanish' ? 'flex' : 'none';
     document.getElementById('language-container2').style.display = language === 'english' ? 'flex' : 'none';
-}
 
-function introSection(language){
-    document.getElementById('name').textContent = 'César Pagán';
-    document.getElementById('title').textContent = language === 'spanish' ? 'Ingeniero de Software' : 'Software Engineer';
-    document.getElementById('motto').textContent = language === 'spanish' ? 'Pasión por la tecnología, compromiso con la excelencia.' : 'Passion for technology, commitment to excellence.';
-}
+    window.location.search = `?lang=${language}`;
 
-function headerSection(language){
-    document.getElementById('link-home').textContent = language === 'spanish' ? 'Inicio' : 'Home';
-    document.getElementById('link-about').textContent = language === 'spanish' ? 'Sobre mí' : 'About Me';
-    document.getElementById('link-experience').textContent = language === 'spanish' ? 'Experiencia' : 'Experience';
-    document.getElementById('link-projects').textContent = language === 'spanish' ? 'Proyectos' : 'Projects';
-    document.getElementById('link-education').textContent = language === 'spanish' ? 'Educación' : 'Education';
-    document.getElementById('link-contact').textContent = language === 'spanish' ? 'Contacto' : 'Contact';
 }
 
 function aboutMeSection(language){
@@ -62,17 +39,6 @@ function aboutMeSection(language){
     document.getElementById('skill-5').textContent = language === 'spanish' ? 'Adaptabilidad' : 'Adaptability';
 }
 
-function experienceSection(language){
-    document.getElementById('experience-title').textContent = language === 'spanish' ? 'Experiencia' : 'Experience';
-}
-
-function projectSection(language){
-    document.getElementById('project-title').textContent = language === 'spanish' ? 'Proyectos' : 'Projects';
-}
-
-function educationSection(language){
-    document.getElementById('education-title').textContent = language === 'spanish' ? 'Educación' : 'Education';
-}
 
 function contactSection(language){
     document.getElementById('contact-title').textContent = language === 'spanish' ? 'Contacto' : 'Contact';
