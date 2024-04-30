@@ -10,17 +10,14 @@ const { currentLanguage } = Astro.props;
 <footer class="footer">
     <div class="footer-content">
         <div class="socials">
-            <!-- <p class="text-footer">Información</p> -->
-            <!-- <a href="mailto:cesar.paganvillafane@gmail.com" target="_blank"><Gmail/></a> -->
             <div class="row">
-                <a href="https://linkedin.com/in/cesarpaganv" target="_blank"><LinkedIn/></a>
-                <a href="https://github.com/SrKaiser" target="_blank"><GitHub/></a>
-                <a href="https://drive.google.com/file/d/1I9PHgZIUCRDernJl5Io0niXtUaD9PMp3/view?usp=sharing" target="_blank"><CV/></a>
+                <a href="https://linkedin.com/in/cesarpaganv" target="_blank" aria-label="LinkedIn"><LinkedIn/></a>
+                <a href="https://github.com/SrKaiser" target="_blank" aria-label="GitHub"><GitHub/></a>
+                <a href="https://drive.google.com/file/d/1I9PHgZIUCRDernJl5Io0niXtUaD9PMp3/view?usp=sharing" target="_blank" aria-label="Curriculum"><CV/></a>
             </div>
         </div>
         <p class="text-footer" id="footer-text">{currentLanguage === 'spanish' ? '© 2024 César Pagán - Todos los derechos reservados.': '© 2024 César Pagán - All rights reserved.'}</p>
         <div class="socials">
-            <!-- <p class="text-footer">Web creada con</p> -->
             <div class="row">
                 <AstroSVG/>
             </div>
