@@ -1,5 +1,5 @@
 ---
-import Switch from '../widgets/Switch.astro';
+import Switch from '../widgets/LightSwitch.astro';
 const { currentLanguage } = Astro.props;
 ---
 
@@ -89,7 +89,7 @@ const { currentLanguage } = Astro.props;
     display: block;
     width: 100%;
     height: 3px;
-    background-color: #427bff;
+    background-color: var(--blue-titles-color);
     position: absolute;
     bottom: -1px;
     left: 0;
@@ -102,7 +102,7 @@ const { currentLanguage } = Astro.props;
 }
 
 .navigation-right a:hover, .navigation-right a.active-link {
-    color: #427bff !important;
+    color: var(--blue-titles-color) !important;
 }
 
 .menu-toggle {

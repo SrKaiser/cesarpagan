@@ -31,7 +31,7 @@ const { language } = Astro.props;
     width: 600px;
     background:
       linear-gradient(var(--contact-form-color), var(--contact-form-color)) padding-box,
-      linear-gradient(145deg, transparent 35%, var(--special-border-color), #427bff) border-box;
+      linear-gradient(145deg, transparent 35%, var(--special-border-color), #0D4AD9) border-box;
     border: 2px solid transparent;
     padding: 32px 24px;
     font-size: 14px;
@@ -63,7 +63,7 @@ const { language } = Astro.props;
   .form-container .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: #717171;
+    color: #a5a5a5;
     font-weight: 600;
     font-size: 12px;
   }
@@ -96,12 +96,12 @@ const { language } = Astro.props;
 
   .form-container .form-group input:focus {
     outline: none;
-    border-color: #427bff;
+    border-color: var(--blue-titles-color);
   }
 
   .form-container .form-group textarea:focus {
     outline: none;
-    border-color: #427bff;
+    border-color: var(--blue-titles-color);
   }
 
   .form-container .form-submit-btn {
@@ -110,7 +110,7 @@ const { language } = Astro.props;
     justify-content: center;
     align-self: flex-start;
     font-family: inherit;
-    color: #717171;
+    color: #b8b8b8;
     font-weight: 600;
     background: var(--contact-form-button-color);
     border: 1px solid #414141;
@@ -126,8 +126,8 @@ const { language } = Astro.props;
 
   .form-container .form-submit-btn:hover {
     color: white;
-    background-color: #427bff;
-    border-color: #427bff;
+    background-color: var(--blue-titles-color);
+    border-color: var(--blue-titles-color);
   }
 
   @media (max-width: 768px) {
