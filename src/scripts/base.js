@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetSection = document.querySelector(targetId);
         console.log(targetId);
 
-        if (targetId === '#about-me' || targetId === '#experience') {
-          const topPosition = targetSection.offsetTop + 80;
+        if (targetId === '#about-me') {
+          const topPosition = targetSection.offsetTop + 200;
           window.scrollTo({
             top: topPosition,
             behavior: 'smooth'
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Función para cambiar el estado activo de los enlaces al hacer scroll
-
   const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
 
   function changeLinkState() {
@@ -122,3 +121,5 @@ document.addEventListener('DOMContentLoaded', () => {
   handleContactForm();
   switchDarkLightMode();
 });
+
+
