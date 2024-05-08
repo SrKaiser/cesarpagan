@@ -13,7 +13,13 @@ const { currentLanguage } = Astro.props;
             <div class="row">
                 <a href="https://linkedin.com/in/cesarpaganv" target="_blank" aria-label="LinkedIn"><LinkedIn/></a>
                 <a href="https://github.com/SrKaiser" target="_blank" aria-label="GitHub"><GitHub/></a>
-                <a href="https://drive.google.com/file/d/1I9PHgZIUCRDernJl5Io0niXtUaD9PMp3/view?usp=sharing" target="_blank" aria-label="Curriculum"><CV/></a>
+                <a href={currentLanguage === 'spanish' 
+                        ? "https://drive.google.com/file/d/1nIXK6a7I7gesRXmfWlf8bJNdSoR3FLaY/view?usp=sharing" 
+                        : "https://drive.google.com/file/d/1mOeIuDSY_8jo-mGp0IJh7BZhPjOloZnC/view?usp=sharing"} target="_blank">
+                    <div class="icon-text">
+                        <CV/>
+                    </div>
+                </a>
             </div>
         </div>
         <p class="text-footer" id="footer-text">{currentLanguage === 'spanish' ? '© 2024 César Pagán - Todos los derechos reservados.': '© 2024 César Pagán - All rights reserved.'}</p>
