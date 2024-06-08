@@ -1,9 +1,6 @@
 ---
-import LinkedIn from '../svg/LinkedIn.astro';
-import GitHub from '../svg/GitHub.astro';
-import CV from '../svg/CV.astro';
-import Gmail from '../svg/Gmail.astro';
-import AstroSVG from '../svg/tech/AstroSVG.astro';
+import GitHub from '../svg/GitHubBig.astro';
+import CV from '../svg/CVBig.astro';
 const { currentLanguage } = Astro.props;
 ---
 
@@ -11,27 +8,36 @@ const { currentLanguage } = Astro.props;
     <div class="footer-content">
         <div class="socials">
             <div class="row">
-                <a href="https://linkedin.com/in/cesarpaganv" target="_blank" aria-label="LinkedIn"><LinkedIn/></a>
                 <a href="https://github.com/SrKaiser" target="_blank" aria-label="GitHub"><GitHub/></a>
-                <a href={currentLanguage === 'spanish' 
-                        ? "https://drive.google.com/file/d/1xSiK_P_JWzCTNorlhpZ9KdxC3Tk-IliQ/view?usp=sharing" 
-                        : "https://drive.google.com/file/d/1leUIhWigM6Qk7YzFGCUE5Z9kg24y65m9/view?usp=sharing"} target="_blank">
-                    <div class="icon-text">
-                        <CV/>
-                    </div>
-                </a>
             </div>
         </div>
         <p class="text-footer" id="footer-text">{currentLanguage === 'spanish' ? '© 2024 César Pagán - Todos los derechos reservados.': '© 2024 César Pagán - All rights reserved.'}</p>
         <div class="socials">
             <div class="row">
-                <AstroSVG/>
+                <a class="link" href={currentLanguage === 'spanish' 
+                ? "https://drive.google.com/file/d/1xSiK_P_JWzCTNorlhpZ9KdxC3Tk-IliQ/view?usp=sharing" 
+                : "https://drive.google.com/file/d/1leUIhWigM6Qk7YzFGCUE5Z9kg24y65m9/view?usp=sharing"} target="_blank">
+                <CV/>
+                </a>
             </div>
         </div>
     </div>
 </footer>
 
 <style>
+
+.cv-icon {
+    fill: #ffffff; 
+    width: 50px !important; 
+    height: 50px !important; 
+}
+
+
+.socials .row svg {
+    fill: #ffffff; 
+    width: 50px !important; 
+    height: 50px !important; 
+}
 
 .footer {
     background-color: var(--header-color);

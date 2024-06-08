@@ -1,23 +1,31 @@
 ---
 import ContactForm from "../widgets/ContactForm.astro";
 const { currentLanguage } = Astro.props;
-
 ---
 
 <section id="contact" class="contact">
     <div>
-        <h1 class="section-title text-center" id="contact-title">{currentLanguage === 'spanish' ? 'Contacto': 'Contact'}</h1>
-        <p class="section-text" id="contact-text"> 
+        <h1 class="section-title text-center" id="contact-title">
+            {currentLanguage === "spanish" ? "Contacto" : "Contact"}
+        </h1>
+        <!-- <p class="section-text" id="contact-text"> 
             {currentLanguage === 'spanish' ? 'En la actualidad, me encuentro plenamente satisfecho con mi posición laboral, sin embargo, permanezco abierto a explorar diversas propuestas freelance o vacantes de empleo. Para contactarme, puedes hacerlo utilizando el formulario que se encuentra aquí abajo, o bien, a través de mi perfil de LinkedIn.': 'Currently, I am fully satisfied with my job position, however, I remain open to explore various freelance proposals or job openings. To contact me, you can do so using the form below, or through my LinkedIn profile.'}
-        </p>
+        </p> -->
         <div class="contact-container">
-            <ContactForm language={currentLanguage}/>
+            <ContactForm language={currentLanguage} />
+        </div>
         </div>
     </div>
 </section>
 
 <style>
-
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 200px;
+    }
 
     .section-text {
         font-size: 1.25rem;
@@ -25,7 +33,7 @@ const { currentLanguage } = Astro.props;
         margin-bottom: 2rem;
         padding: 20px 300px;
     }
-    
+
     .contact-container {
         display: flex;
         justify-content: center;
@@ -40,11 +48,10 @@ const { currentLanguage } = Astro.props;
         }
 
         .section-text {
-            font-size: .85rem;
-            padding: 0 20px; 
+            font-size: 0.85rem;
+            padding: 0 20px;
         }
     }
-
 
 
 </style>

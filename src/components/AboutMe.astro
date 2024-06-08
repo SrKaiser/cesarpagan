@@ -29,7 +29,7 @@ const { currentLanguage } = Astro.props;
                 'My passion for innovation and quality in software development drives me to deliver solutions that not only meet needs but also provide exceptional experiences to users. I am committed to continuous learning and professional growth, aiming to always stay ahead in this rapidly advancing industry.'}
             </p>
             <h1 class="section-subtitle" id="skills-title">{currentLanguage === 'spanish' ? 'Habilidades esenciales' : 'Soft Skills'}</h1>
-            <div class="row">
+            <div class="row skills-row">
                 <div class="icon-container">
                     <Proactivity />
                     <span class="description" id="skill-1">{currentLanguage === 'spanish' ? 'Proactividad' : 'Proactivity'}</span>
@@ -86,6 +86,7 @@ const { currentLanguage } = Astro.props;
     .waves-level-1,
     .waves-level-2,
     .waves-level-3 {
+        padding-top: 50px;
         width: 100%;
         top: 2px;
     }
@@ -108,11 +109,15 @@ const { currentLanguage } = Astro.props;
         align-items: center;
     }
 
+    .skills-row{
+        margin-bottom: 30px;
+    }
+
     .icon-container {
         display: inline-block;
         position: relative;
-        padding: 0px 30px;
-        padding-bottom: 40px;
+        padding: 0px 50px;
+        padding-bottom: 55px;
         padding-top: 20px;
         overflow: hidden;
     }
@@ -130,29 +135,16 @@ const { currentLanguage } = Astro.props;
         transition: clip-path 0.8s ease-out;
     }
 
+    .icon-container:hover::before {
+        clip-path: circle(75% at 50% 50%);
+    }
+
     .description {
         position: absolute;
         bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
         white-space: nowrap;
-        visibility: hidden;
-        opacity: 0;
-        transition:
-            opacity 0.3s ease,
-            visibility 0s linear 0.3s;
-    }
-
-    .icon-container:hover::before {
-        clip-path: circle(75% at 50% 50%);
-    }
-
-    .icon-container:hover .description {
-        visibility: visible;
-        opacity: 1;
-        transition:
-            opacity 0.3s ease,
-            visibility 0s;
     }
 
     @media (max-width: 768px) {

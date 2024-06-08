@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         const targetSection = document.querySelector(targetId);
-        console.log(targetId);
 
         if (targetId === '#about-me') {
           const topPosition = targetSection.offsetTop + 200;
