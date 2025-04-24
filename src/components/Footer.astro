@@ -11,18 +11,55 @@ const { currentLanguage } = Astro.props;
                 <a href="https://github.com/SrKaiser" target="_blank" aria-label="GitHub"><GitHub/></a>
             </div>
         </div>
-        <p class="text-footer" id="footer-text">{currentLanguage === 'spanish' ? '© 2025 César Pagán - Todos los derechos reservados.': '© 2024 César Pagán - All rights reserved.'}</p>
+        <p class="text-footer" id="footer-text" data-i18n="footer-text">
+            {currentLanguage === 'spanish' ? '© 2025 César Pagán - Todos los derechos reservados.' : '© 2024 César Pagán - All rights reserved.'}
+        </p>
         <div class="socials">
             <div class="row">
-                <a class="link" href={currentLanguage === 'spanish' 
-                ? "https://drive.google.com/file/d/1xSiK_P_JWzCTNorlhpZ9KdxC3Tk-IliQ/view?usp=sharing" 
-                : "https://drive.google.com/file/d/1leUIhWigM6Qk7YzFGCUE5Z9kg24y65m9/view?usp=sharing"} target="_blank">
-                <CV/>
+                <a class="link" 
+                   id="footer-cv-link"
+                   href={currentLanguage === 'spanish' 
+                       ? "https://drive.google.com/file/d/1xSiK_P_JWzCTNorlhpZ9KdxC3Tk-IliQ/view?usp=sharing" 
+                       : "https://drive.google.com/file/d/1leUIhWigM6Qk7YzFGCUE5Z9kg24y65m9/view?usp=sharing"} 
+                   target="_blank"
+                   data-spanish-url="https://drive.google.com/file/d/1xSiK_P_JWzCTNorlhpZ9KdxC3Tk-IliQ/view?usp=sharing"
+                   data-english-url="https://drive.google.com/file/d/1leUIhWigM6Qk7YzFGCUE5Z9kg24y65m9/view?usp=sharing">
+                    <CV/>
                 </a>
             </div>
         </div>
     </div>
 </footer>
+
+<script>
+    // Actualizar el footer cuando cambie el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            updateCvLink(event.detail.language);
+        }
+    });
+
+    // Inicializar con el idioma actual
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentLanguage = localStorage.getItem('language') || 'spanish';
+        updateCvLink(currentLanguage);
+    });
+
+    // Función para actualizar el enlace del CV según el idioma
+    function updateCvLink(language) {
+        const cvLink = document.getElementById('footer-cv-link');
+        if (cvLink) {
+            const spanishUrl = cvLink.getAttribute('data-spanish-url');
+            const englishUrl = cvLink.getAttribute('data-english-url');
+            
+            if (language === 'spanish' && spanishUrl) {
+                cvLink.setAttribute('href', spanishUrl);
+            } else if (language === 'english' && englishUrl) {
+                cvLink.setAttribute('href', englishUrl);
+            }
+        }
+    }
+</script>
 
 <style>
 

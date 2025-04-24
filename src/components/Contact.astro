@@ -4,10 +4,10 @@ const { currentLanguage } = Astro.props;
 
 <section id="contact" class="contact">
     <div>
-        <h1 class="section-title text-center" id="contact-title">
+        <h1 class="section-title text-center" id="contact-title" data-i18n="contact-title">
             {currentLanguage === "spanish" ? "Contacto" : "Contact"}
         </h1>
-        <p class="section-text" id="contact-text">
+        <p class="section-text" id="contact-text" data-i18n="contact-text">
             {currentLanguage === 'spanish' 
                 ? '¿Interesado en conectar? Elige el método que prefieras:'
                 : 'Interested in connecting? Choose your preferred method:'}
@@ -35,6 +35,16 @@ const { currentLanguage } = Astro.props;
         </div>
     </div>
 </section>
+
+<script>
+    // Actualizar cuando cambie el idioma
+    document.addEventListener('languageChanged', (event) => {
+        // El sistema central de traducciones se encargará de actualizar los textos
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            // No necesitamos hacer nada más aquí, las traducciones se manejan automáticamente
+        }
+    });
+</script>
 
 <style>
     .section-text {

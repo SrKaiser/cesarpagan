@@ -26,14 +26,24 @@ const technologyComponents = {
     'CSS': CSS,
 };
 ---
-<div class="card-container" style={{ backgroundImage: `url(${project.image})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+<div class="card-container project-card" style={{ backgroundImage: `url(${project.image})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
     <div class="card">
         <div class="front-content">
-            <p>{project.title[language]}</p>
+            <p class="project-title" 
+               data-spanish-title={project.title.spanish}
+               data-english-title={project.title.english}>
+                {project.title[language]}
+            </p>
         </div>
         <div class="content">
-            <p class="heading">{project.title[language]}</p>
-            <p>
+            <p class="heading project-heading" 
+               data-spanish-title={project.title.spanish}
+               data-english-title={project.title.english}>
+                {project.title[language]}
+            </p>
+            <p class="project-description" 
+               data-spanish-description={project.description.spanish}
+               data-english-description={project.description.english}>
                 {project.description[language]}
             </p>
             <div class="buttons-row">
@@ -321,3 +331,45 @@ const technologyComponents = {
 
 }
 </style>
+
+<script>
+    // Actualizar cuando cambia el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            updateProjectCards(event.detail.language);
+        }
+    });
+
+    // Inicializar con el idioma actual
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentLanguage = localStorage.getItem('language') || 'spanish';
+        updateProjectCards(currentLanguage);
+    });
+
+    // Función para actualizar las tarjetas de proyectos
+    function updateProjectCards(language) {
+        // Actualizar títulos de proyectos
+        document.querySelectorAll('.project-title, .project-heading').forEach(element => {
+            const spanishTitle = element.getAttribute('data-spanish-title');
+            const englishTitle = element.getAttribute('data-english-title');
+            
+            if (language === 'spanish' && spanishTitle) {
+                element.textContent = spanishTitle;
+            } else if (language === 'english' && englishTitle) {
+                element.textContent = englishTitle;
+            }
+        });
+        
+        // Actualizar descripciones de proyectos
+        document.querySelectorAll('.project-description').forEach(element => {
+            const spanishDesc = element.getAttribute('data-spanish-description');
+            const englishDesc = element.getAttribute('data-english-description');
+            
+            if (language === 'spanish' && spanishDesc) {
+                element.textContent = spanishDesc;
+            } else if (language === 'english' && englishDesc) {
+                element.textContent = englishDesc;
+            }
+        });
+    }
+</script>

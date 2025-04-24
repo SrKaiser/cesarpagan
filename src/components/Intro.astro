@@ -7,9 +7,9 @@ const { currentLanguage } = Astro.props;
 
 <div id="intro" class="intro">
     <img src='/assets/profile-pic.png' alt="César Pagán" class="profile-pic">
-    <h1 id="name">César Pagán</h1>
-    <h2 id="title">{currentLanguage === 'spanish' ? 'Ingeniero de Software' : 'Software Engineer'}</h2>
-    <h3 id="motto">{currentLanguage === 'spanish' ? 'Pasión por la tecnología, compromiso con la excelencia.' : 'Passion for technology, commitment to excellence.'}</h3>
+    <h1 id="name" data-i18n="name">César Pagán</h1>
+    <h2 id="title" data-i18n="title">{currentLanguage === 'spanish' ? 'Ingeniero de Software' : 'Software Engineer'}</h2>
+    <h3 id="motto" data-i18n="motto">{currentLanguage === 'spanish' ? 'Pasión por la tecnología, compromiso con la excelencia.' : 'Passion for technology, commitment to excellence.'}</h3>
     <div class="row">
         <a href="https://www.linkedin.com/in/cesarpaganv/" target="_blank">
             <div class="icon-text">
@@ -25,15 +25,49 @@ const { currentLanguage } = Astro.props;
         </a>
         <a href={currentLanguage === 'spanish' 
                 ? "https://drive.google.com/file/d/1xSiK_P_JWzCTNorlhpZ9KdxC3Tk-IliQ/view?usp=sharing" 
-                : "https://drive.google.com/file/d/1leUIhWigM6Qk7YzFGCUE5Z9kg24y65m9/view?usp=sharing"} target="_blank">
+                : "https://drive.google.com/file/d/1leUIhWigM6Qk7YzFGCUE5Z9kg24y65m9/view?usp=sharing"} 
+           target="_blank" 
+           id="cv-link" 
+           data-spanish-url="https://drive.google.com/file/d/1xSiK_P_JWzCTNorlhpZ9KdxC3Tk-IliQ/view?usp=sharing"
+           data-english-url="https://drive.google.com/file/d/1leUIhWigM6Qk7YzFGCUE5Z9kg24y65m9/view?usp=sharing">
             <div class="icon-text">
                 <CV/>
-                <span>{currentLanguage === 'spanish' ? 'Currículum' : 'Resume'}</span>
+                <span data-i18n="cv-text">{currentLanguage === 'spanish' ? 'Currículum' : 'Resume'}</span>
             </div>
         </a>
     </div>
 </div>
 
+<script>
+    // Escuchar el evento de cambio de idioma
+    document.addEventListener('languageChanged', (event) => {
+        // Verificamos que el evento tenga la estructura esperada
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            updateCvLink(event.detail.language);
+        }
+    });
+
+    // Inicializar con el idioma actual
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentLanguage = localStorage.getItem('language') || 'spanish';
+        updateCvLink(currentLanguage);
+    });
+
+    // Función para actualizar el enlace del CV según el idioma
+    function updateCvLink(language) {
+        const cvLink = document.getElementById('cv-link');
+        if (cvLink) {
+            const spanishUrl = cvLink.getAttribute('data-spanish-url');
+            const englishUrl = cvLink.getAttribute('data-english-url');
+            
+            if (language === 'spanish' && spanishUrl) {
+                cvLink.setAttribute('href', spanishUrl);
+            } else if (language === 'english' && englishUrl) {
+                cvLink.setAttribute('href', englishUrl);
+            }
+        }
+    }
+</script>
 
 <style>
     .intro {
@@ -153,6 +187,5 @@ const { currentLanguage } = Astro.props;
         .icon-text span{
             font-size: 0.85rem;
         }
-
     }
 </style>

@@ -6,30 +6,94 @@ import UK from "../svg/UK.astro";
 ---
 
 <div class="language-switch">
-    <div class="languages" id="language-container" style={{ display: currentLanguage === 'spanish' ? 'flex' : 'none' }}>
-        <div class="icon-text" id="spanish-select">
-            <Spain/> <span id="spanish-text" data-language="spanish">Español</span>
+    <div class="languages" id="language-container" style={{ display: 'flex' }}>
+        <div class="icon-text" id="spanish-select" data-language="spanish">
+            <Spain/> <span id="spanish-text">Español</span>
         </div>
         <div class="separator"></div>
-        <div class="icon-text" id="english-select">
-            <UK/> <span id="english-text" data-language="english">English</span>
+        <div class="icon-text" id="english-select" data-language="english">
+            <UK/> <span id="english-text">English</span>
         </div>
     </div>
 
-    <div class="languages" id="language-container2" style={{ display: currentLanguage === 'english' ? 'flex' : 'none' }}>
-        <div class="icon-text" id="english-select2">
-            <UK/> <span id="english-text" data-language="english">English</span>
+    <div class="languages" id="language-container2" style={{ display: 'none' }}>
+        <div class="icon-text" id="english-select2" data-language="english">
+            <UK/> <span id="english-text">English</span>
         </div>
         <div class="separator"></div>
-        <div class="icon-text" id="spanish-select2">
-            <Spain/> <span id="spanish-text" data-language="spanish">Español</span>
+        <div class="icon-text" id="spanish-select2" data-language="spanish">
+            <Spain/> <span id="spanish-text">Español</span>
         </div>
     </div>
 </div>
 
+<script>
+    // Función para cambiar el idioma
+    function setLanguage(language: string) {
+        // Guardar el idioma en localStorage
+        localStorage.setItem('language', language);
+        
+        // Actualizar visibilidad de los contenedores de idioma
+        const container1 = document.getElementById('language-container');
+        const container2 = document.getElementById('language-container2');
+        
+        if (container1 && container2) {
+            container1.style.display = language === 'spanish' ? 'flex' : 'none';
+            container2.style.display = language === 'english' ? 'flex' : 'none';
+        }
+        
+        // Disparar evento personalizado para que los componentes se actualicen
+        document.dispatchEvent(new CustomEvent('languageChanged', { 
+            detail: { language }
+        }));
+    }
+    
+    // Escuchar el clic en los selectores de idioma
+    document.querySelectorAll('[id^="spanish-select"], [id^="english-select"]').forEach(selector => {
+        selector.addEventListener('click', (event) => {
+            const target = event.currentTarget;
+            if (target instanceof HTMLElement) {
+                const language = target.getAttribute('data-language');
+                if (language) {
+                    setLanguage(language);
+                }
+            }
+        });
+    });
+    
+    // Escuchar el clic en el toggle para mostrar/ocultar opciones
+    const switchElement = document.querySelector('.language-switch');
+    if (switchElement) {
+        switchElement.addEventListener('click', function(event) {
+            // Solo activar el toggle si se hace clic en el switch pero no en las opciones de idioma
+            const target = event.target as HTMLElement;
+            if (target && !target.closest('[id^="spanish-select"], [id^="english-select"]')) {
+                const container1 = document.getElementById('language-container');
+                const container2 = document.getElementById('language-container2');
+                
+                if (container1 && container2) {
+                    if (container1.style.display === 'flex') {
+                        container1.style.display = 'none';
+                        container2.style.display = 'none';
+                    } else {
+                        // Mostrar el contenedor apropiado según el idioma actual
+                        const currentLanguage = localStorage.getItem('language') || 'spanish';
+                        container1.style.display = currentLanguage === 'spanish' ? 'flex' : 'none';
+                        container2.style.display = currentLanguage === 'english' ? 'flex' : 'none';
+                    }
+                }
+            }
+        });
+    }
+    
+    // Inicializar el switch con el idioma guardado
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLanguage = localStorage.getItem('language') || 'spanish';
+        setLanguage(savedLanguage);
+    });
+</script>
 
 <style>
-
 .language-switch {
     margin-left: 2.5rem;
     border-top-left-radius: 15%;
@@ -78,5 +142,4 @@ import UK from "../svg/UK.astro";
         margin-left: 1.5rem;
     }
 }
-
 </style>

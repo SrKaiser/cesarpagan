@@ -10,10 +10,9 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import LanguageSwitch from '../components/LanguageSwitch.astro';
 
-import { Astro } from 'astro/server';
-
-const url = new URL(Astro.request.url);
-let currentLanguage = url.searchParams.get('lang') || 'spanish';
+// Determinar el idioma inicial (por defecto español)
+// Esto será reemplazado por JavaScript del lado del cliente
+const currentLanguage = 'spanish';
 ---
 
 <Layout title="César Pagán | Ingeniero de Software">
@@ -28,3 +27,39 @@ let currentLanguage = url.searchParams.get('lang') || 'spanish';
         <Footer currentLanguage={currentLanguage}/>
         <LanguageSwitch currentLanguage={currentLanguage}/>
     </main>
+
+    <script>
+        // Inicializar el idioma desde localStorage o detectar el idioma del navegador
+        function initializeLanguage() {
+            let savedLanguage = localStorage.getItem('language');
+            
+            if (!savedLanguage) {
+                // Detectar idioma del navegador
+                const userLanguage = navigator.language;
+                savedLanguage = userLanguage.startsWith('es') ? 'spanish' : 'english';
+                localStorage.setItem('language', savedLanguage);
+            }
+            
+            document.documentElement.setAttribute('data-language', savedLanguage);
+            updateAllLanguageElements(savedLanguage);
+        }
+        
+        // Actualizar el idioma de todos los elementos en la página
+        function updateAllLanguageElements(language) {
+            // Actualizar visibilidad de los contenedores de idioma del switch
+            const container1 = document.getElementById('language-container');
+            const container2 = document.getElementById('language-container2');
+            
+            if (container1 && container2) {
+                container1.style.display = language === 'spanish' ? 'flex' : 'none';
+                container2.style.display = language === 'english' ? 'flex' : 'none';
+            }
+            
+            // Notificar a todos los componentes sobre el cambio de idioma
+            document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language } }));
+        }
+        
+        // Inicializar el idioma al cargar la página
+        document.addEventListener('DOMContentLoaded', initializeLanguage);
+    </script>
+</Layout>

@@ -12,17 +12,33 @@ const technologyComponents = {
 };
 ---
 
-<div class="card">
+<div class="card education-card">
     <div class="card2">
         <div class="image-container">
             <img src={school.image} alt={`Imagen de ${school.title[language]}`} />
         </div>
         <div class="info-container">
             <div class="content">
-                <h2>{school.title[language]}</h2>
-                <h3>{school.subtitle[language]}</h3>
-                <p class="period">{school.period[language]}</p>
-                <p class="description">{school.description[language]}</p>
+                <h2 class="card-title" 
+                   data-spanish-title={school.title.spanish} 
+                   data-english-title={school.title.english}>
+                    {school.title[language]}
+                </h2>
+                <h3 class="card-subtitle" 
+                   data-spanish-subtitle={school.subtitle.spanish} 
+                   data-english-subtitle={school.subtitle.english}>
+                    {school.subtitle[language]}
+                </h3>
+                <p class="period card-period" 
+                   data-spanish-period={school.period.spanish} 
+                   data-english-period={school.period.english}>
+                    {school.period[language]}
+                </p>
+                <p class="description card-description" 
+                   data-spanish-description={school.description.spanish} 
+                   data-english-description={school.description.english}>
+                    {school.description[language]}
+                </p>
                 <hr class="divider" />
             </div>
         </div>

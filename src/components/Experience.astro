@@ -51,12 +51,24 @@ const { currentLanguage } = Astro.props;
 
 <section id="experience" class="experience">
     <div>
-        <h1 class="section-title" id="experience-title"> {currentLanguage === 'spanish' ? 'Experiencia' : 'Experience'} </h1>
+        <h1 class="section-title" id="experience-title" data-i18n="experience-title">
+            {currentLanguage === 'spanish' ? 'Experiencia' : 'Experience'}
+        </h1>
         <div class="experience-container">
             {jobs.map((job) => <JobCard job={job} key={job.company} language={currentLanguage}/>)}
         </div>
     </div>
 </section>
+
+<script>
+    // Actualizar cuando cambia el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            // El título se actualiza automáticamente a través del sistema central de traducciones
+            // No necesitamos actualizar las tarjetas de trabajo aquí porque se manejan en JobCard.astro
+        }
+    });
+</script>
 
 <style>
     .experience {

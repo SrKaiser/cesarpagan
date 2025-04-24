@@ -29,12 +29,83 @@ const { currentLanguage } = Astro.props;
 
 <section id="education" class="education">
     <div>
-        <h1 class="section-title text-center" id="education-title">{currentLanguage === 'spanish' ? 'Educación' : 'Education'}</h1>
+        <h1 class="section-title text-center" id="education-title" data-i18n="education-title">
+            {currentLanguage === 'spanish' ? 'Educación' : 'Education'}
+        </h1>
         <div class="education-container">
             {schools.map((school) => <EducationCard school={school} key={school.title} language={currentLanguage}/>)}
         </div>
     </div>
 </section>
+
+<script>
+    // Actualizar cuando cambie el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            updateEducationCards(event.detail.language);
+        }
+    });
+
+    // Inicializar con el idioma actual
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentLanguage = localStorage.getItem('language') || 'spanish';
+        updateEducationCards(currentLanguage);
+    });
+
+    // Función para actualizar las tarjetas de educación cuando cambia el idioma
+    function updateEducationCards(language) {
+        const cards = document.querySelectorAll('.education-card');
+        
+        cards.forEach(card => {
+            // Obtener los elementos traducibles dentro de cada tarjeta
+            const titleElement = card.querySelector('.card-title');
+            const subtitleElement = card.querySelector('.card-subtitle');
+            const periodElement = card.querySelector('.card-period');
+            const descriptionElement = card.querySelector('.card-description');
+            
+            // Obtener datos almacenados en atributos data
+            if (titleElement) {
+                const titles = {
+                    spanish: titleElement.getAttribute('data-spanish-title'),
+                    english: titleElement.getAttribute('data-english-title')
+                };
+                if (titles[language]) {
+                    titleElement.textContent = titles[language];
+                }
+            }
+            
+            if (subtitleElement) {
+                const subtitles = {
+                    spanish: subtitleElement.getAttribute('data-spanish-subtitle'),
+                    english: subtitleElement.getAttribute('data-english-subtitle')
+                };
+                if (subtitles[language]) {
+                    subtitleElement.textContent = subtitles[language];
+                }
+            }
+            
+            if (periodElement) {
+                const periods = {
+                    spanish: periodElement.getAttribute('data-spanish-period'),
+                    english: periodElement.getAttribute('data-english-period')
+                };
+                if (periods[language]) {
+                    periodElement.textContent = periods[language];
+                }
+            }
+            
+            if (descriptionElement) {
+                const descriptions = {
+                    spanish: descriptionElement.getAttribute('data-spanish-description'),
+                    english: descriptionElement.getAttribute('data-english-description')
+                };
+                if (descriptions[language]) {
+                    descriptionElement.textContent = descriptions[language];
+                }
+            }
+        });
+    }
+</script>
 
 <style>
     .education-container {
@@ -52,7 +123,5 @@ const { currentLanguage } = Astro.props;
         .education-container {
             margin-bottom: 0rem;
         }
-        
     }
-
 </style>

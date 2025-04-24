@@ -32,16 +32,28 @@ const technologyComponents = {
 };
 
 ---
-<div class="card">
+<div class="card job-card">
   <div class="content">
     <div class="back">
       <div class="back-content">
-          <strong data-job-title>{job.title[language]}</strong>
+          <strong class="job-title" 
+                 data-spanish-title={job.title.spanish} 
+                 data-english-title={job.title.english}>
+              {job.title[language]}
+          </strong>
           {job.company[language] === "Verdementa" && <Verdementa />}
           {job.company[language] === "Ayuntamiento de Cartagena" && <AytoCartagena />}
           {job.company[language] === "Cartagena City Council" && <AytoCartagena />}
-          <strong data-job-company>{job.company[language]}</strong>
-          <strong data-job-period>{job.period[language]}</strong>
+          <strong class="job-company" 
+                 data-spanish-company={job.company.spanish} 
+                 data-english-company={job.company.english}>
+              {job.company[language]}
+          </strong>
+          <strong class="job-period" 
+                 data-spanish-period={job.period.spanish} 
+                 data-english-period={job.period.english}>
+              {job.period[language]}
+          </strong>
           <div class="technologies">
               {job.technologies.map((tech) => {
                   const TechComponent = technologyComponents[tech];
@@ -58,15 +70,27 @@ const technologyComponents = {
       </div>
 
       <div class="front-content">
-        <small class="badge">{job.company[language]}</small>
-        <div class="pre-line">
+        <small class="badge job-company-badge"
+               data-spanish-company={job.company.spanish} 
+               data-english-company={job.company.english}>
+          {job.company[language]}
+        </small>
+        <div class="pre-line job-description"
+             data-spanish-description={job.description.spanish} 
+             data-english-description={job.description.english}>
           {job.description[language]}
         </div>
         <div class="description">
           <div class="title">
-            <strong>{job.title[language]}</strong>
+            <strong class="job-title-front"
+                    data-spanish-title={job.title.spanish} 
+                    data-english-title={job.title.english}>
+              {job.title[language]}
+            </strong>
           </div>
-          <p class="card-footer">
+          <p class="card-footer job-period-footer"
+             data-spanish-period={job.period.spanish} 
+             data-english-period={job.period.english}>
             {job.period[language]}
           </p>
         </div>
@@ -74,6 +98,72 @@ const technologyComponents = {
     </div>
   </div>
 </div>
+
+<script>
+    // Actualizar cuando cambia el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            updateJobCards(event.detail.language);
+        }
+    });
+
+    // Inicializar con el idioma actual
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentLanguage = localStorage.getItem('language') || 'spanish';
+        updateJobCards(currentLanguage);
+    });
+
+    // Función para actualizar las tarjetas de trabajo
+    function updateJobCards(language) {
+        // Actualizar títulos
+        document.querySelectorAll('.job-title, .job-title-front').forEach(element => {
+            const spanishTitle = element.getAttribute('data-spanish-title');
+            const englishTitle = element.getAttribute('data-english-title');
+            
+            if (language === 'spanish' && spanishTitle) {
+                element.textContent = spanishTitle;
+            } else if (language === 'english' && englishTitle) {
+                element.textContent = englishTitle;
+            }
+        });
+        
+        // Actualizar empresas
+        document.querySelectorAll('.job-company, .job-company-badge').forEach(element => {
+            const spanishCompany = element.getAttribute('data-spanish-company');
+            const englishCompany = element.getAttribute('data-english-company');
+            
+            if (language === 'spanish' && spanishCompany) {
+                element.textContent = spanishCompany;
+            } else if (language === 'english' && englishCompany) {
+                element.textContent = englishCompany;
+            }
+        });
+        
+        // Actualizar periodos
+        document.querySelectorAll('.job-period, .job-period-footer').forEach(element => {
+            const spanishPeriod = element.getAttribute('data-spanish-period');
+            const englishPeriod = element.getAttribute('data-english-period');
+            
+            if (language === 'spanish' && spanishPeriod) {
+                element.textContent = spanishPeriod;
+            } else if (language === 'english' && englishPeriod) {
+                element.textContent = englishPeriod;
+            }
+        });
+        
+        // Actualizar descripciones
+        document.querySelectorAll('.job-description').forEach(element => {
+            const spanishDesc = element.getAttribute('data-spanish-description');
+            const englishDesc = element.getAttribute('data-english-description');
+            
+            if (language === 'spanish' && spanishDesc) {
+                element.textContent = spanishDesc;
+            } else if (language === 'english' && englishDesc) {
+                element.textContent = englishDesc;
+            }
+        });
+    }
+</script>
 
 <style>
   .technologies {

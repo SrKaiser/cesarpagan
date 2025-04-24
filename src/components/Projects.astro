@@ -90,7 +90,9 @@ const { currentLanguage } = Astro.props;
 
 <section id="projects" class="projects">
     <div>
-        <h1 class="section-title text-center" id="project-title">{currentLanguage === 'spanish' ? 'Proyectos' : 'Projects'} </h1>
+        <h1 class="section-title text-center" id="project-title" data-i18n="projects-title">
+            {currentLanguage === 'spanish' ? 'Proyectos' : 'Projects'}
+        </h1>
         <div class="projects-container">
             {
                 projects.map((project) => (
@@ -100,6 +102,16 @@ const { currentLanguage } = Astro.props;
         </div>
     </div>
 </section>
+
+<script>
+    // Actualizar cuando cambia el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            // El título se actualiza automáticamente a través del sistema central de traducciones
+            // No necesitamos actualizar las tarjetas de proyectos aquí porque se manejan en ProjectCard.astro
+        }
+    });
+</script>
 
 <style>
     .projects-container {

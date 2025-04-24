@@ -12,16 +12,92 @@ const { currentLanguage } = Astro.props;
             <Switch />
         </div>
         <div class="navigation-right">
-            <a href="#intro" id="link-home">{currentLanguage === 'spanish' ? 'Inicio' : 'Home'}</a>
-            <a href="#about-me" id="link-about">{currentLanguage === 'spanish' ? 'Sobre mí' : 'About Me'}</a>
-            <a href="#experience" id="link-experience">{currentLanguage === 'spanish' ? 'Experiencia' : 'Experience'}</a>
-            <a href="#projects" id="link-projects">{currentLanguage === 'spanish' ? 'Proyectos' : 'Projects'}</a>
-            <a href="#education" id="link-education">{currentLanguage === 'spanish' ? 'Educación' : 'Education'}</a>
-            <a href="#contact" id="link-contact">{currentLanguage === 'spanish' ? 'Contacto' : 'Contact'}</a>
+            <a href="#intro" id="link-home" data-i18n="nav-home">{currentLanguage === 'spanish' ? 'Inicio' : 'Home'}</a>
+            <a href="#about-me" id="link-about" data-i18n="nav-about">{currentLanguage === 'spanish' ? 'Sobre mí' : 'About Me'}</a>
+            <a href="#experience" id="link-experience" data-i18n="nav-experience">{currentLanguage === 'spanish' ? 'Experiencia' : 'Experience'}</a>
+            <a href="#projects" id="link-projects" data-i18n="nav-projects">{currentLanguage === 'spanish' ? 'Proyectos' : 'Projects'}</a>
+            <a href="#education" id="link-education" data-i18n="nav-education">{currentLanguage === 'spanish' ? 'Educación' : 'Education'}</a>
+            <a href="#contact" id="link-contact" data-i18n="nav-contact">{currentLanguage === 'spanish' ? 'Contacto' : 'Contact'}</a>
         </div>
     </div>
 </header>
 
+<script>
+    // Actualizar la navegación cuando cambie el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            // El sistema central de traducciones se encargará de actualizar los textos
+            highlightActiveSection(); // Actualizar el resaltado de la sección activa
+        }
+    });
+
+    // Función para resaltar la sección activa
+    function highlightActiveSection() {
+        // Obtener todos los enlaces de navegación
+        const navLinks = document.querySelectorAll('.navigation-right a');
+        
+        // Obtener la posición actual del scroll
+        const scrollPosition = window.scrollY;
+        
+        // Obtener todas las secciones
+        const sections = Array.from(navLinks).map(link => {
+            const sectionId = link.getAttribute('href')?.substring(1);
+            return {
+                id: sectionId,
+                element: document.getElementById(sectionId || ''),
+                link: link
+            };
+        }).filter(section => section.element !== null);
+        
+        // Encontrar la sección visible actual
+        for (let i = sections.length - 1; i >= 0; i--) {
+            const section = sections[i];
+            if (section.element) {
+                const rect = section.element.getBoundingClientRect();
+                
+                if (rect.top <= 150) {
+                    // Eliminar clase activa de todos los enlaces
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-link');
+                    });
+                    
+                    // Agregar clase activa al enlace correspondiente
+                    section.link.classList.add('active-link');
+                    break;
+                }
+            }
+        }
+    }
+
+    // Menu toggle en móvil
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const header = document.querySelector('.header');
+        const navigationRight = document.querySelector('.navigation-right');
+        
+        if (menuToggle && header && navigationRight) {
+            menuToggle.addEventListener('click', () => {
+                header.classList.toggle('active');
+                navigationRight.classList.toggle('active');
+            });
+            
+            // Cerrar menú cuando se hace clic en un enlace
+            const navLinks = document.querySelectorAll('.navigation-right a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    header.classList.remove('active');
+                    navigationRight.classList.remove('active');
+                });
+            });
+        }
+        
+        // Detectar scroll para resaltar la sección activa
+        window.addEventListener('scroll', highlightActiveSection);
+        
+        // Inicializar resaltado
+        highlightActiveSection();
+    });
+</script>
 
 <style>
 .header {
