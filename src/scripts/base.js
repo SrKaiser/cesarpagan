@@ -89,35 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateActiveLink);
   }
 
-  // Función para manejar el formulario de contacto
-  function handleContactForm() {
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const serviceID = 'default_service';
-      const templateID = 'template_91xq21x';
-
-      emailjs.sendForm(serviceID, templateID, this)
-        .then(() => {
-          const alertBox = document.getElementById('alert-box');
-          alertBox.classList.add('alert-visible');
-          setTimeout(function() {
-            alertBox.classList.remove('alert-visible');
-            setTimeout(function() {
-              alertBox.style.display = 'none';
-            }, 500); 
-          }, 5000);
-        }, (err) => {
-          alert(JSON.stringify(err));
-        });
-    });
-  }
-
   // Ejecutar funciones
   handleMenuToggle();
   handleSmoothScroll();
   changeLinkState();
-  handleContactForm();
   switchDarkLightMode();
 });
 

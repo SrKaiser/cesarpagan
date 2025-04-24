@@ -1,5 +1,4 @@
 ---
-import ContactForm from "../widgets/ContactForm.astro";
 const { currentLanguage } = Astro.props;
 ---
 
@@ -8,28 +7,39 @@ const { currentLanguage } = Astro.props;
         <h1 class="section-title text-center" id="contact-title">
             {currentLanguage === "spanish" ? "Contacto" : "Contact"}
         </h1>
-        <!-- <p class="section-text" id="contact-text"> 
-            {currentLanguage === 'spanish' ? 'En la actualidad, me encuentro plenamente satisfecho con mi posición laboral, sin embargo, permanezco abierto a explorar diversas propuestas freelance o vacantes de empleo. Para contactarme, puedes hacerlo utilizando el formulario que se encuentra aquí abajo, o bien, a través de mi perfil de LinkedIn.': 'Currently, I am fully satisfied with my job position, however, I remain open to explore various freelance proposals or job openings. To contact me, you can do so using the form below, or through my LinkedIn profile.'}
-        </p> -->
+        <p class="section-text" id="contact-text">
+            {currentLanguage === 'spanish' 
+                ? '¿Interesado en conectar? Elige el método que prefieras:'
+                : 'Interested in connecting? Choose your preferred method:'}
+        </p>
         <div class="contact-container">
-            <ContactForm language={currentLanguage} />
-        </div>
+            <div class="buttons-container">
+                <button class="button">
+                    <a href="https://www.linkedin.com/in/cesarpaganv/" target="_blank" class="no-link-style">
+                        <svg viewBox="55.005 23.8289 333.061 333.0491" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Path_2520" data-name="Path 2520" d="M 338.789 307.609 L 289.44 307.609 L 289.44 230.326 C 289.44 211.898 289.111 188.174 263.773 188.174 C 238.07 188.174 234.138 208.253 234.138 228.985 L 234.138 307.604 L 184.788 307.604 L 184.788 148.679 L 232.164 148.679 L 232.164 170.398 L 232.827 170.398 C 242.491 153.881 260.452 144.017 279.57 144.726 C 329.587 144.726 338.809 177.626 338.809 220.426 L 338.789 307.609 Z M 129.106 126.955 C 107.063 126.96 93.281 103.098 104.298 84.006 C 115.319 64.909 142.877 64.909 153.904 83.996 C 156.418 88.35 157.739 93.29 157.739 98.312 C 157.744 114.13 144.923 126.955 129.106 126.955 M 153.781 307.609 L 104.38 307.609 L 104.38 148.679 L 153.781 148.679 L 153.781 307.609 Z M 363.391 23.851 L 79.582 23.851 C 66.17 23.702 55.169 34.446 55.005 47.858 L 55.005 332.844 C 55.164 346.266 66.165 357.02 79.582 356.876 L 363.391 356.876 C 376.839 357.046 387.881 346.292 388.066 332.844 L 388.066 47.837 C 387.876 34.4 376.834 23.656 363.391 23.831" fill="#0b65c2"></path>
+                        </svg>
+                    </a>
+                </button>
+                <div class="email-container">
+                    <button class="button">
+                        <a href="mailto:cesar.paganvillafane@gmail.com" class="no-link-style">
+                            <svg width="80" height="80" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM19.6 8.25L12.53 12.67C12.21 12.87 11.79 12.87 11.47 12.67L4.4 8.25C4.15 8.09 4 7.82 4 7.53C4 6.86 4.73 6.46 5.3 6.81L12 11L18.7 6.81C19.27 6.46 20 6.86 20 7.53C20 7.82 19.85 8.09 19.6 8.25Z" fill="#EA4335"/>
+                            </svg>
+                        </a>
+                    </button>
+                    <span class="email-text">cesar.paganvillafane@gmail.com</span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <style>
-    .row {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 200px;
-    }
-
     .section-text {
         font-size: 1.25rem;
-        text-align: start;
+        text-align: center;
         margin-bottom: 2rem;
         padding: 20px 300px;
     }
@@ -38,8 +48,49 @@ const { currentLanguage } = Astro.props;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 3rem;
+        margin-top: 1rem;
         margin-bottom: 5rem;
+    }
+
+    .buttons-container {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .email-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .email-text {
+        font-size: 0.75rem;
+        color: var(--text-color);
+        opacity: 0.7;
+        letter-spacing: 0.5px;
+    }
+
+    .button {
+        background-color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+        animation: sway 2s infinite alternate;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 500px;
+        transition: transform 0.5s, box-shadow 0.5s;
+    }
+
+    .button:hover {
+        transform: scale(1.05) rotate(-360deg) translateY(-1em);
+        box-shadow: 0 0 20px 0 rgba(29, 161, 242, 0.5);
     }
 
     @media (max-width: 768px) {
@@ -51,7 +102,18 @@ const { currentLanguage } = Astro.props;
             font-size: 0.85rem;
             padding: 0 20px;
         }
+
+        .button {
+            width: 80px;
+            height: 80px;
+        }
+
+        .buttons-container {
+            gap: 1rem;
+        }
+
+        .email-text {
+            font-size: 0.65rem;
+        }
     }
-
-
 </style>

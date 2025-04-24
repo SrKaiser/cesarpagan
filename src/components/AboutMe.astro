@@ -17,38 +17,65 @@ const { currentLanguage } = Astro.props;
         <div class="waves-level-2"><Waves2/></div>
         <div class="waves-level-3"><Waves3/></div>
         <div class="about-container">
-            <h1 class="section-title" id="about-title">{currentLanguage === 'spanish' ? 'Sobre mí' : 'About Me'}</h1>
-            <p class="section-text" id="about-text1">
-                {currentLanguage === 'spanish' ?
-                'Soy un Ingeniero Informático con especialización en Desarrollo de Software, llevando casi un año de experiencia en Desarrollo Web Full-Stack y de Aplicaciones Móviles. Mi curiosidad me lleva a explorar las últimas tendencias y tecnologías, siempre buscando ampliar mis horizontes y superar nuevos retos.' :
-                'I am a Computer Engineer specializing in Software Development, with nearly a year of experience in Full-Stack Web Development and Mobile Applications. My curiosity drives me to explore the latest trends and technologies, always seeking to broaden my horizons and overcome new challenges.'}
-            </p>
-            <p class="section-text" id="about-text2">
-                {currentLanguage === 'spanish' ?
-                'Mi pasión por la innovación y la calidad en el desarrollo de software me motiva a entregar soluciones que no solo satisfacen las necesidades, sino que también ofrecen experiencias excepcionales a los usuarios. Estoy comprometido con el aprendizaje continuo y el crecimiento profesional, con el objetivo de estar siempre al frente en esta industria de rápido avance.' :
-                'My passion for innovation and quality in software development drives me to deliver solutions that not only meet needs but also provide exceptional experiences to users. I am committed to continuous learning and professional growth, aiming to always stay ahead in this rapidly advancing industry.'}
-            </p>
-            <h1 class="section-subtitle" id="skills-title">{currentLanguage === 'spanish' ? 'Habilidades esenciales' : 'Soft Skills'}</h1>
-            <div class="row skills-row">
-                <div class="icon-container">
-                    <Proactivity />
-                    <span class="description" id="skill-1">{currentLanguage === 'spanish' ? 'Proactividad' : 'Proactivity'}</span>
+            <h1 class="section-title" id="about-title">{currentLanguage === 'spanish' ? '¿Quién soy?' : 'Who am I?'}</h1>
+            
+            <div class="about-content">
+                <div class="profile-card">
+                    <div class="profile-info">
+                        <div class="profile-header">
+                            <span class="profile-emoji">👨‍💻</span>
+                            <h2 class="profile-greeting">{currentLanguage === 'spanish' ? '¡Hola mundo!' : 'Hello world!'}</h2>
+                        </div>
+                        
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <span class="highlight-icon">🎓</span>
+                                <span class="highlight-text">{currentLanguage === 'spanish' ? 'Ing. Informático' : 'Computer Engineer'}</span>
+                            </div>
+                            <div class="highlight-item">
+                                <span class="highlight-icon">💻</span>
+                                <span class="highlight-text">{currentLanguage === 'spanish' ? 'Desarrollo Web Full-Stack' : 'Full-Stack Web Dev'}</span>
+                            </div>
+                            <div class="highlight-item">
+                                <span class="highlight-icon">📱</span>
+                                <span class="highlight-text">{currentLanguage === 'spanish' ? 'Desarrollo Móvil' : 'Mobile Development'}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="icon-container">
-                    <TeamWork />
-                    <span class="description" id="skill-2">{currentLanguage === 'spanish' ? 'Trabajo en Equipo' : 'Team Work'}</span>
+                
+                <div class="personal-statement">
+                    <p class="statement-text">
+                        {currentLanguage === 'spanish' 
+                            ? '¡Hola! Me encanta construir cosas que viven en internet, desde sitios web hasta aplicaciones móviles. Mi objetivo es crear soluciones que sean tanto funcionales como atractivas. Aunque sigo aprendiendo cada día, estoy constantemente buscando nuevos retos que me permitan seguir creciendo como desarrollador.'
+                            : 'Hi there! I love building things that live on the internet, from websites to mobile apps. My goal is to create solutions that are both functional and engaging. While I\'m still learning every day, I\'m constantly seeking new challenges that allow me to grow as a developer.'}
+                    </p>
                 </div>
-                <div class="icon-container">
-                    <Learning />
-                    <span class="description" id="skill-3">{currentLanguage === 'spanish' ? 'Aprendizaje' : 'Learning'}</span>
-                </div>
-                <div class="icon-container">
-                    <Comunication />
-                    <span class="description" id="skill-4">{currentLanguage === 'spanish' ? 'Comunicación' : 'Communication'}</span>
-                </div>
-                <div class="icon-container">
-                    <Adaptability />
-                    <span class="description" id="skill-5">{currentLanguage === 'spanish' ? 'Adaptabilidad' : 'Adaptability'}</span>
+
+                <div class="skills-section">
+                    <h3 class="skills-title">{currentLanguage === 'spanish' ? 'Habilidades esenciales' : 'Soft Skills'}</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon"><Proactivity /></div>
+                            <span class="skill-name">{currentLanguage === 'spanish' ? 'Proactividad' : 'Proactivity'}</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><TeamWork /></div>
+                            <span class="skill-name">{currentLanguage === 'spanish' ? 'Trabajo en Equipo' : 'Team Work'}</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><Learning /></div>
+                            <span class="skill-name">{currentLanguage === 'spanish' ? 'Aprendizaje' : 'Learning'}</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><Comunication /></div>
+                            <span class="skill-name">{currentLanguage === 'spanish' ? 'Comunicación' : 'Communication'}</span>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><Adaptability /></div>
+                            <span class="skill-name">{currentLanguage === 'spanish' ? 'Adaptabilidad' : 'Adaptability'}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,15 +85,8 @@ const { currentLanguage } = Astro.props;
 
 
 <style>
-    .section-title,
-    .section-subtitle {
+    .section-title {
         color: white;
-        margin-bottom: 2rem;
-    }
-
-    .section-text {
-        font-size: 1.25rem;
-        text-align: start;
         margin-bottom: 2rem;
     }
 
@@ -81,6 +101,158 @@ const { currentLanguage } = Astro.props;
         color: #ffffff;
         text-align: center;
         padding: 0% 15%;
+    }
+
+    .about-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .profile-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        border-radius: 16px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .profile-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .profile-info {
+        text-align: center;
+    }
+
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .profile-emoji {
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .profile-greeting {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        background: linear-gradient(45deg, #ffffff, #b3d9ff);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    .highlights {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .highlight-item {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.6rem 1rem;
+        border-radius: 50px;
+        gap: 0.5rem;
+    }
+
+    .highlight-icon {
+        font-size: 1.2rem;
+    }
+
+    .highlight-text {
+        font-size: 0.9rem;
+    }
+
+    .personal-statement {
+        max-width: 700px;
+    }
+
+    .statement-text {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        text-align: center;
+        font-style: italic;
+    }
+
+    .skills-section {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .skills-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        color: white;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1.5rem;
+        justify-content: center;
+    }
+
+    .skill-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .skill-card::before {
+        content: "";
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+        top: -25%;
+        left: -25%;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: -1;
+    }
+
+    .skill-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-card:hover::before {
+        opacity: 1;
+    }
+
+    .skill-icon {
+        margin-bottom: 0.8rem;
+        transform: scale(0.9);
+    }
+
+    .skill-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-align: center;
     }
 
     .waves-level-1,
@@ -102,66 +274,9 @@ const { currentLanguage } = Astro.props;
         transform: rotate(180deg);
     }
 
-    .row {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-
-    .skills-row{
-        margin-bottom: 30px;
-    }
-
-    .icon-container {
-        display: inline-block;
-        position: relative;
-        padding: 0px 50px;
-        padding-bottom: 55px;
-        padding-top: 20px;
-        overflow: hidden;
-    }
-
-    .icon-container::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border: 3px solid white;
-        border-radius: 10%;
-        clip-path: circle(0% at 50% 90%);
-        transition: clip-path 0.8s ease-out;
-    }
-
-    .icon-container:hover::before {
-        clip-path: circle(75% at 50% 50%);
-    }
-
-    .description {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: nowrap;
-    }
-
     @media (max-width: 768px) {
         .section-title {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-            white-space: nowrap;
-        }
-
-        .section-text {
-            font-size: 1rem;
             margin-bottom: 1rem;
         }
 
@@ -169,23 +284,48 @@ const { currentLanguage } = Astro.props;
             padding: 20px;
         }
 
-        .row {
-            flex-wrap: wrap;
+        .profile-card {
+            padding: 1.5rem;
         }
 
-        .icon-container {
-            padding: 0px 25px; 
-            padding-bottom: 35px;
-            padding-top: 10px;
-            overflow: visible;
-            box-sizing: border-box; 
-            transform: scale(0.9);
+        .profile-emoji {
+            font-size: 2.5rem;
         }
 
-        .description {
-            bottom: 2.5px;
-            margin-bottom: 5px;
+        .profile-greeting {
+            font-size: 1.5rem;
         }
 
+        .highlights {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .statement-text {
+            font-size: 1rem;
+        }
+
+        .skills-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skills-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .skill-card {
+            padding: 1rem 0.5rem;
+        }
+
+        .skill-icon {
+            transform: scale(0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-size: 0.8rem;
+        }
     }
 </style>
