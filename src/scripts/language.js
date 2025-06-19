@@ -135,8 +135,17 @@ const translations = {
     }
 };
 
+// Variable para evitar actualizaciones redundantes
+let isUpdating = false;
+
 // Función para actualizar todos los elementos traducibles en la página
 function updatePageContent(language) {
+    // Evitar recursión infinita
+    if (isUpdating) {
+        return;
+    }
+    isUpdating = true;
+    
     // Obtener todos los elementos que tienen atributos data-i18n
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
@@ -179,8 +188,10 @@ function updatePageContent(language) {
     // Guardar el idioma seleccionado en localStorage
     localStorage.setItem('language', language);
     
-    // Notificar a todos los componentes sobre el cambio de idioma
-    document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language } }));
+    // Establecer el idioma como atributo en el documento para posibles estilos CSS
+    document.documentElement.setAttribute('data-language', language);
+    
+    isUpdating = false;
 }
 
 // Función para inicializar el idioma
@@ -196,17 +207,13 @@ function initializeLanguage() {
     
     // Aplicar las traducciones iniciales
     updatePageContent(savedLanguage);
-    
-    // Establecer el idioma como atributo en el documento para posibles estilos CSS
-    document.documentElement.setAttribute('data-language', savedLanguage);
 }
 
-// Escuchar el evento personalizado de cambio de idioma
+// Escuchar el evento personalizado de cambio de idioma (solo para actualizar traducciones)
 document.addEventListener('languageChanged', (event) => {
-    // Verificamos que el evento tenga la estructura esperada
-    if (event instanceof CustomEvent && event.detail && event.detail.language) {
+    // Verificamos que el evento tenga la estructura esperada y que no estemos ya actualizando
+    if (event instanceof CustomEvent && event.detail && event.detail.language && !isUpdating) {
         updatePageContent(event.detail.language);
-        document.documentElement.setAttribute('data-language', event.detail.language);
     }
 });
 

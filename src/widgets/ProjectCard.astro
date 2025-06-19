@@ -93,6 +93,95 @@ const technologyComponents = {
     </div>
 </div>
 
+<script>
+    // Función para agregar eventos táctiles y de clic
+    function addTouchAndClickEvent(element, callback) {
+        if (!element) return;
+        
+        let touchStartTime = 0;
+        let touchEndTime = 0;
+        
+        // Eventos táctiles para móviles
+        element.addEventListener('touchstart', (e) => {
+            touchStartTime = Date.now();
+        }, { passive: true });
+        
+        element.addEventListener('touchend', (e) => {
+            touchEndTime = Date.now();
+            // Solo ejecutar si el toque fue rápido (menos de 300ms)
+            if (touchEndTime - touchStartTime < 300) {
+                e.preventDefault();
+                callback(e);
+            }
+        }, { passive: false });
+        
+        // Evento de clic para dispositivos no táctiles
+        element.addEventListener('click', (e) => {
+            // Evitar doble ejecución en dispositivos táctiles
+            if (touchEndTime === 0 || Date.now() - touchEndTime > 100) {
+                callback(e);
+            }
+        });
+    }
+
+    // Actualizar cuando cambia el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            updateProjectCards(event.detail.language);
+        }
+    });
+
+    // Configurar eventos táctiles para las tarjetas de proyectos
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentLanguage = localStorage.getItem('language') || 'spanish';
+        updateProjectCards(currentLanguage);
+        
+        // Configurar eventos táctiles para dispositivos móviles
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            document.querySelectorAll('.project-card').forEach(card => {
+                addTouchAndClickEvent(card, (e) => {
+                    // Verificar si el clic fue en un botón o enlace
+                    if (e.target.closest('.project-button') || e.target.closest('a')) {
+                        return; // No hacer nada si se hizo clic en un botón/enlace
+                    }
+                    
+                    e.stopPropagation();
+                    card.classList.toggle('expanded');
+                });
+            });
+        }
+    });
+
+    // Función para actualizar las tarjetas de proyectos
+    function updateProjectCards(language) {
+        // Actualizar títulos de proyectos
+        document.querySelectorAll('.project-title, .project-heading').forEach(element => {
+            const spanishTitle = element.getAttribute('data-spanish-title');
+            const englishTitle = element.getAttribute('data-english-title');
+            
+            if (language === 'spanish' && spanishTitle) {
+                element.textContent = spanishTitle;
+            } else if (language === 'english' && englishTitle) {
+                element.textContent = englishTitle;
+            }
+        });
+        
+        // Actualizar descripciones de proyectos
+        document.querySelectorAll('.project-description').forEach(element => {
+            const spanishDesc = element.getAttribute('data-spanish-description');
+            const englishDesc = element.getAttribute('data-english-description');
+            
+            if (language === 'spanish' && spanishDesc) {
+                element.textContent = spanishDesc;
+            } else if (language === 'english' && englishDesc) {
+                element.textContent = englishDesc;
+            }
+        });
+    }
+</script>
+
 <style>
 
     .card-container:nth-of-type(2n) {
@@ -187,20 +276,56 @@ const technologyComponents = {
         font-weight: 700;
     }
 
-    .card-container:hover .content {
-        transform: translateY(0);
+    /* Hover para dispositivos no móviles */
+    @media (min-width: 769px) {
+        .card-container:hover .content {
+            transform: translateY(0);
+        }
+
+        .card-container:nth-of-type(2n+1):hover .front-content {
+            transform: translateX(-30%);
+        }
+
+        .card-container:nth-of-type(2n):hover .front-content {
+            transform: translateX(30%);
+        }
+
+        .card:hover .front-content p {
+            opacity: 0;
+        }
+
+        .card-container:nth-of-type(2n):hover .content {
+            transform: translateX(0%);
+        }
     }
 
-    .card-container:nth-of-type(2n+1):hover .front-content {
-        transform: translateX(-30%);
-    }
+    /* Estados para dispositivos móviles */
+    @media (max-width: 768px) {
+        .project-card {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        .project-card.expanded .content {
+            transform: translateY(0);
+        }
+        
+        .project-card.expanded .front-content p {
+            opacity: 0;
+        }
+        
+        .project-card.expanded:nth-of-type(2n+1) .front-content {
+            transform: translateX(-30%);
+        }
 
-    .card-container:nth-of-type(2n):hover .front-content {
-        transform: translateX(30%);
-    }
+        .project-card.expanded:nth-of-type(2n) .front-content {
+            transform: translateX(30%);
+        }
 
-    .card:hover .front-content p {
-        opacity: 0;
+        .project-card.expanded:nth-of-type(2n) .content {
+            transform: translateX(0%);
+        }
     }
 
     .card-container:nth-of-type(2n) .content {
@@ -208,10 +333,6 @@ const technologyComponents = {
         transform: translateX(96%);
         transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         padding-left: 120px;
-    }
-
-    .card-container:nth-of-type(2n):hover .content {
-        transform: translateX(0%);
     }
 
     .project-button {
@@ -331,45 +452,3 @@ const technologyComponents = {
 
 }
 </style>
-
-<script>
-    // Actualizar cuando cambia el idioma
-    document.addEventListener('languageChanged', (event) => {
-        if (event instanceof CustomEvent && event.detail && event.detail.language) {
-            updateProjectCards(event.detail.language);
-        }
-    });
-
-    // Inicializar con el idioma actual
-    document.addEventListener('DOMContentLoaded', () => {
-        const currentLanguage = localStorage.getItem('language') || 'spanish';
-        updateProjectCards(currentLanguage);
-    });
-
-    // Función para actualizar las tarjetas de proyectos
-    function updateProjectCards(language) {
-        // Actualizar títulos de proyectos
-        document.querySelectorAll('.project-title, .project-heading').forEach(element => {
-            const spanishTitle = element.getAttribute('data-spanish-title');
-            const englishTitle = element.getAttribute('data-english-title');
-            
-            if (language === 'spanish' && spanishTitle) {
-                element.textContent = spanishTitle;
-            } else if (language === 'english' && englishTitle) {
-                element.textContent = englishTitle;
-            }
-        });
-        
-        // Actualizar descripciones de proyectos
-        document.querySelectorAll('.project-description').forEach(element => {
-            const spanishDesc = element.getAttribute('data-spanish-description');
-            const englishDesc = element.getAttribute('data-english-description');
-            
-            if (language === 'spanish' && spanishDesc) {
-                element.textContent = spanishDesc;
-            } else if (language === 'english' && englishDesc) {
-                element.textContent = englishDesc;
-            }
-        });
-    }
-</script>

@@ -11,7 +11,7 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Porfolio César" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -85,13 +85,27 @@ const { title } = Astro.props;
 		font-family: "Montserrat", sans-serif;
 		scroll-behavior: smooth;
 		z-index: -2;
+		-webkit-tap-highlight-color: transparent;
+		touch-action: manipulation;
 	}
 
 
 	* {
 		scrollbar-width: thin; 
 		scrollbar-color: #4f545c #2c2f33;
-		
+		box-sizing: border-box;
+	}
+
+	/* Mejoras para dispositivos táctiles */
+	button, a, [role="button"], .clickable {
+		-webkit-tap-highlight-color: transparent;
+		touch-action: manipulation;
+		user-select: none;
+	}
+
+	/* Optimización para iOS Safari */
+	body {
+		-webkit-text-size-adjust: 100%;
 	}
 
 	.section-title{

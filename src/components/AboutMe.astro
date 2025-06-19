@@ -91,7 +91,7 @@ const { currentLanguage } = Astro.props;
                                 {currentLanguage === 'spanish' ? 'Comunicación' : 'Communication'}
                             </span>
                         </div>
-                        <div class="skill-card">
+                        <div class="skill-card skill-card-last">
                             <div class="skill-icon"><Adaptability /></div>
                             <span class="skill-name" data-i18n="skill-5">
                                 {currentLanguage === 'spanish' ? 'Adaptabilidad' : 'Adaptability'}
@@ -363,6 +363,13 @@ const { currentLanguage } = Astro.props;
         .skills-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
+        }
+
+        /* Centrar la última skill card cuando hay número impar */
+        .skill-card-last:nth-child(odd) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            width: calc(50% - 0.5rem);
         }
 
         .skill-card {

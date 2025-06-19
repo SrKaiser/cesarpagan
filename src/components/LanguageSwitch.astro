@@ -6,88 +6,180 @@ import UK from "../svg/UK.astro";
 ---
 
 <div class="language-switch">
-    <div class="languages" id="language-container" style={{ display: 'flex' }}>
-        <div class="icon-text" id="spanish-select" data-language="spanish">
-            <Spain/> <span id="spanish-text">Español</span>
-        </div>
-        <div class="separator"></div>
-        <div class="icon-text" id="english-select" data-language="english">
-            <UK/> <span id="english-text">English</span>
+    <!-- Idioma actual visible (español) -->
+    <div class="current-language" id="current-spanish" style={{ display: 'flex' }}>
+        <div class="icon-text">
+            <Spain/> <span>Español</span>
         </div>
     </div>
 
-    <div class="languages" id="language-container2" style={{ display: 'none' }}>
-        <div class="icon-text" id="english-select2" data-language="english">
-            <UK/> <span id="english-text">English</span>
+    <!-- Idioma actual visible (inglés) -->
+    <div class="current-language" id="current-english" style={{ display: 'none' }}>
+        <div class="icon-text">
+            <UK/> <span>English</span>
         </div>
-        <div class="separator"></div>
-        <div class="icon-text" id="spanish-select2" data-language="spanish">
-            <Spain/> <span id="spanish-text">Español</span>
+    </div>
+
+    <!-- Opciones desplegadas (hover/tap) -->
+    <div class="language-options">
+        <!-- Opción inglés (visible cuando el idioma actual es español) -->
+        <div class="language-option" id="option-english" data-language="english" style={{ display: 'none' }}>
+            <div class="separator"></div>
+            <div class="icon-text">
+                <UK/> <span>English</span>
+            </div>
+        </div>
+
+        <!-- Opción español (visible cuando el idioma actual es inglés) -->
+        <div class="language-option" id="option-spanish" data-language="spanish" style={{ display: 'none' }}>
+            <div class="separator"></div>
+            <div class="icon-text">
+                <Spain/> <span>Español</span>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
+    // Función para agregar eventos táctiles y de clic
+    function addTouchAndClickEvent(element: HTMLElement, callback: (e: Event) => void) {
+        if (!element) return;
+        
+        let touchStartTime = 0;
+        let touchEndTime = 0;
+        
+        // Eventos táctiles para móviles
+        element.addEventListener('touchstart', (e) => {
+            touchStartTime = Date.now();
+        }, { passive: true });
+        
+        element.addEventListener('touchend', (e) => {
+            touchEndTime = Date.now();
+            // Solo ejecutar si el toque fue rápido (menos de 300ms)
+            if (touchEndTime - touchStartTime < 300) {
+                e.preventDefault();
+                callback(e);
+            }
+        }, { passive: false });
+        
+        // Evento de clic para dispositivos no táctiles
+        element.addEventListener('click', (e) => {
+            // Evitar doble ejecución en dispositivos táctiles
+            if (touchEndTime === 0 || Date.now() - touchEndTime > 100) {
+                callback(e);
+            }
+        });
+    }
+
+    // Variable para controlar si está expandido en móvil
+    let isMobileExpanded = false;
+
     // Función para cambiar el idioma
     function setLanguage(language: string) {
         // Guardar el idioma en localStorage
         localStorage.setItem('language', language);
         
-        // Actualizar visibilidad de los contenedores de idioma
-        const container1 = document.getElementById('language-container');
-        const container2 = document.getElementById('language-container2');
-        
-        if (container1 && container2) {
-            container1.style.display = language === 'spanish' ? 'flex' : 'none';
-            container2.style.display = language === 'english' ? 'flex' : 'none';
-        }
+        // Actualizar visibilidad según el idioma actual
+        updateLanguageDisplay(language);
         
         // Disparar evento personalizado para que los componentes se actualicen
         document.dispatchEvent(new CustomEvent('languageChanged', { 
             detail: { language }
         }));
+        
+        // Cerrar el switch en móvil después de seleccionar
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+            collapseMobile();
+        }
     }
-    
-    // Escuchar el clic en los selectores de idioma
-    document.querySelectorAll('[id^="spanish-select"], [id^="english-select"]').forEach(selector => {
-        selector.addEventListener('click', (event) => {
-            const target = event.currentTarget;
-            if (target instanceof HTMLElement) {
+
+    // Función para actualizar la visualización según el idioma actual
+    function updateLanguageDisplay(language: string) {
+        const currentSpanish = document.getElementById('current-spanish');
+        const currentEnglish = document.getElementById('current-english');
+        const optionSpanish = document.getElementById('option-spanish');
+        const optionEnglish = document.getElementById('option-english');
+        
+        if (language === 'spanish') {
+            // Mostrar español como actual, inglés como opción
+            if (currentSpanish) currentSpanish.style.display = 'flex';
+            if (currentEnglish) currentEnglish.style.display = 'none';
+            if (optionSpanish) optionSpanish.style.display = 'none';
+            if (optionEnglish) optionEnglish.style.display = 'block';
+        } else {
+            // Mostrar inglés como actual, español como opción
+            if (currentSpanish) currentSpanish.style.display = 'none';
+            if (currentEnglish) currentEnglish.style.display = 'flex';
+            if (optionSpanish) optionSpanish.style.display = 'block';
+            if (optionEnglish) optionEnglish.style.display = 'none';
+        }
+    }
+
+    // Función para expandir en móvil
+    function expandMobile() {
+        isMobileExpanded = true;
+        const languageSwitch = document.querySelector('.language-switch');
+        if (languageSwitch) {
+            languageSwitch.classList.add('mobile-expanded');
+        }
+    }
+
+    // Función para colapsar en móvil
+    function collapseMobile() {
+        isMobileExpanded = false;
+        const languageSwitch = document.querySelector('.language-switch');
+        if (languageSwitch) {
+            languageSwitch.classList.remove('mobile-expanded');
+        }
+    }
+
+    // Configurar eventos
+    document.addEventListener('DOMContentLoaded', () => {
+        const isMobile = window.innerWidth <= 768;
+        
+        // Eventos para cambiar idioma (solo en las opciones)
+        const languageOptions = document.querySelectorAll('.language-option');
+        
+        languageOptions.forEach(option => {
+            addTouchAndClickEvent(option as HTMLElement, (event) => {
+                event.stopPropagation();
+                const target = event.currentTarget as HTMLElement;
                 const language = target.getAttribute('data-language');
                 if (language) {
                     setLanguage(language);
                 }
-            }
+            });
         });
-    });
-    
-    // Escuchar el clic en el toggle para mostrar/ocultar opciones
-    const switchElement = document.querySelector('.language-switch');
-    if (switchElement) {
-        switchElement.addEventListener('click', function(event) {
-            // Solo activar el toggle si se hace clic en el switch pero no en las opciones de idioma
-            const target = event.target as HTMLElement;
-            if (target && !target.closest('[id^="spanish-select"], [id^="english-select"]')) {
-                const container1 = document.getElementById('language-container');
-                const container2 = document.getElementById('language-container2');
-                
-                if (container1 && container2) {
-                    if (container1.style.display === 'flex') {
-                        container1.style.display = 'none';
-                        container2.style.display = 'none';
+        
+        // Comportamiento diferente para móvil y desktop
+        const languageSwitch = document.querySelector('.language-switch');
+        
+        if (isMobile && languageSwitch) {
+            // En móvil: tap para expandir/colapsar
+            addTouchAndClickEvent(languageSwitch as HTMLElement, (event) => {
+                const target = event.target as HTMLElement;
+                // Solo hacer toggle si no se hizo clic en una opción de idioma
+                if (!target.closest('.language-option')) {
+                    event.stopPropagation();
+                    if (isMobileExpanded) {
+                        collapseMobile();
                     } else {
-                        // Mostrar el contenedor apropiado según el idioma actual
-                        const currentLanguage = localStorage.getItem('language') || 'spanish';
-                        container1.style.display = currentLanguage === 'spanish' ? 'flex' : 'none';
-                        container2.style.display = currentLanguage === 'english' ? 'flex' : 'none';
+                        expandMobile();
                     }
                 }
-            }
-        });
-    }
-    
-    // Inicializar el switch con el idioma guardado
-    document.addEventListener('DOMContentLoaded', () => {
+            });
+
+            // Cerrar al tocar fuera
+            document.addEventListener('click', (event) => {
+                const target = event.target as HTMLElement;
+                if (!target.closest('.language-switch')) {
+                    collapseMobile();
+                }
+            });
+        }
+        
+        // Inicializar con el idioma guardado
         const savedLanguage = localStorage.getItem('language') || 'spanish';
         setLanguage(savedLanguage);
     });
@@ -101,23 +193,59 @@ import UK from "../svg/UK.astro";
     background-color: var(--header-color);
     padding: 10px;
     width: 140px;
-    height: 75px;
+    min-height: 75px;
     z-index: 999;
     bottom: -32px;
     left: 0;
     position: fixed;
-    transition: bottom 0.3s ease;
+    transition: bottom 0.3s ease, height 0.3s ease;
     box-shadow: -1px -3px 8px var(--background-color-shadow);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    overflow: hidden;
 }
 
 .language-switch:hover {
     bottom: 0px;
 }
 
-.languages {
+/* Desktop: Mostrar opciones al hacer hover */
+@media (min-width: 769px) {
+    .language-switch:hover .language-options {
+        display: block;
+    }
+}
+
+/* Móvil: Mostrar opciones cuando está expandido */
+@media (max-width: 768px) {
+    .language-switch {
+        margin-left: 1.5rem;
+        bottom: 0px;
+        cursor: pointer;
+    }
+    
+    .language-switch:hover {
+        bottom: 0px;
+    }
+    
+    .language-switch.mobile-expanded .language-options {
+        display: block;
+    }
+}
+
+.current-language,
+.language-options {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.language-options {
+    display: none;
+}
+
+.language-option {
+    width: 100%;
 }
 
 .icon-text {
@@ -126,20 +254,33 @@ import UK from "../svg/UK.astro";
     align-items: center; 
     margin-bottom: 0.25rem;
     margin-top: 0.25rem;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.language-option .icon-text:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .separator {
     border: 1px solid #292828;
     width: 100%;
+    margin: 5px 0;
 }
 
 .icon-text span {
     margin-left: 10px;
+    font-size: 14px;
 }
 
 @media (max-width: 768px) {
-    .language-switch{
-        margin-left: 1.5rem;
+    .icon-text span {
+        font-size: 12px;
     }
 }
 </style>

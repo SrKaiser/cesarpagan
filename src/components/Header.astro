@@ -27,75 +27,8 @@ const { currentLanguage } = Astro.props;
     document.addEventListener('languageChanged', (event) => {
         if (event instanceof CustomEvent && event.detail && event.detail.language) {
             // El sistema central de traducciones se encargará de actualizar los textos
-            highlightActiveSection(); // Actualizar el resaltado de la sección activa
+            // No es necesario hacer nada adicional aquí
         }
-    });
-
-    // Función para resaltar la sección activa
-    function highlightActiveSection() {
-        // Obtener todos los enlaces de navegación
-        const navLinks = document.querySelectorAll('.navigation-right a');
-        
-        // Obtener la posición actual del scroll
-        const scrollPosition = window.scrollY;
-        
-        // Obtener todas las secciones
-        const sections = Array.from(navLinks).map(link => {
-            const sectionId = link.getAttribute('href')?.substring(1);
-            return {
-                id: sectionId,
-                element: document.getElementById(sectionId || ''),
-                link: link
-            };
-        }).filter(section => section.element !== null);
-        
-        // Encontrar la sección visible actual
-        for (let i = sections.length - 1; i >= 0; i--) {
-            const section = sections[i];
-            if (section.element) {
-                const rect = section.element.getBoundingClientRect();
-                
-                if (rect.top <= 150) {
-                    // Eliminar clase activa de todos los enlaces
-                    navLinks.forEach(link => {
-                        link.classList.remove('active-link');
-                    });
-                    
-                    // Agregar clase activa al enlace correspondiente
-                    section.link.classList.add('active-link');
-                    break;
-                }
-            }
-        }
-    }
-
-    // Menu toggle en móvil
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuToggle = document.querySelector('.menu-toggle');
-        const header = document.querySelector('.header');
-        const navigationRight = document.querySelector('.navigation-right');
-        
-        if (menuToggle && header && navigationRight) {
-            menuToggle.addEventListener('click', () => {
-                header.classList.toggle('active');
-                navigationRight.classList.toggle('active');
-            });
-            
-            // Cerrar menú cuando se hace clic en un enlace
-            const navLinks = document.querySelectorAll('.navigation-right a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    header.classList.remove('active');
-                    navigationRight.classList.remove('active');
-                });
-            });
-        }
-        
-        // Detectar scroll para resaltar la sección activa
-        window.addEventListener('scroll', highlightActiveSection);
-        
-        // Inicializar resaltado
-        highlightActiveSection();
     });
 </script>
 
@@ -246,6 +179,4 @@ const { currentLanguage } = Astro.props;
         display: flex;
     }
 }
-
-
 </style>

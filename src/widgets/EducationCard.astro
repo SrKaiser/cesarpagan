@@ -13,7 +13,7 @@ const technologyComponents = {
 ---
 
 <div class="card education-card">
-    <div class="card2">
+    <div class="card2" data-bg-image={school.image}>
         <div class="image-container">
             <img src={school.image} alt={`Imagen de ${school.title[language]}`} />
         </div>
@@ -45,6 +45,98 @@ const technologyComponents = {
     </div>
 </div>
 
+<script>
+    // Actualizar cuando cambia el idioma
+    document.addEventListener('languageChanged', (event) => {
+        if (event instanceof CustomEvent && event.detail && event.detail.language) {
+            updateEducationCards(event.detail.language);
+        }
+    });
+
+    // Inicializar con el idioma actual
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentLanguage = localStorage.getItem('language') || 'spanish';
+        updateEducationCards(currentLanguage);
+        
+        // Configurar imagen de fondo para móvil
+        setupMobileBackground();
+    });
+
+    // Función para configurar la imagen de fondo en móvil
+    function setupMobileBackground() {
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            document.querySelectorAll('.card2[data-bg-image]').forEach(card => {
+                const htmlCard = card as HTMLElement;
+                const bgImage = htmlCard.getAttribute('data-bg-image');
+                if (bgImage) {
+                    htmlCard.style.backgroundImage = `url(${bgImage})`;
+                    htmlCard.style.backgroundSize = 'cover';
+                    htmlCard.style.backgroundPosition = 'center';
+                    htmlCard.style.backgroundRepeat = 'no-repeat';
+                }
+            });
+        }
+    }
+
+    // Configurar imagen de fondo cuando se redimensiona la ventana
+    window.addEventListener('resize', () => {
+        setupMobileBackground();
+    });
+
+    // Función para actualizar las tarjetas de educación
+    function updateEducationCards(language) {
+        // Actualizar títulos
+        document.querySelectorAll('.card-title').forEach(element => {
+            const spanishTitle = element.getAttribute('data-spanish-title');
+            const englishTitle = element.getAttribute('data-english-title');
+            
+            if (language === 'spanish' && spanishTitle) {
+                element.textContent = spanishTitle;
+            } else if (language === 'english' && englishTitle) {
+                element.textContent = englishTitle;
+            }
+        });
+        
+        // Actualizar subtítulos
+        document.querySelectorAll('.card-subtitle').forEach(element => {
+            const spanishSubtitle = element.getAttribute('data-spanish-subtitle');
+            const englishSubtitle = element.getAttribute('data-english-subtitle');
+            
+            if (language === 'spanish' && spanishSubtitle) {
+                element.textContent = spanishSubtitle;
+            } else if (language === 'english' && englishSubtitle) {
+                element.textContent = englishSubtitle;
+            }
+        });
+        
+        // Actualizar periodos
+        document.querySelectorAll('.card-period').forEach(element => {
+            const spanishPeriod = element.getAttribute('data-spanish-period');
+            const englishPeriod = element.getAttribute('data-english-period');
+            
+            if (language === 'spanish' && spanishPeriod) {
+                element.textContent = spanishPeriod;
+            } else if (language === 'english' && englishPeriod) {
+                element.textContent = englishPeriod;
+            }
+        });
+        
+        // Actualizar descripciones
+        document.querySelectorAll('.card-description').forEach(element => {
+            const spanishDesc = element.getAttribute('data-spanish-description');
+            const englishDesc = element.getAttribute('data-english-description');
+            
+            if (language === 'spanish' && spanishDesc) {
+                element.textContent = spanishDesc;
+            } else if (language === 'english' && englishDesc) {
+                element.textContent = englishDesc;
+            }
+        });
+    }
+</script>
+
 <style>
     
     .card {
@@ -66,6 +158,7 @@ const technologyComponents = {
         transition: all 0.2s;
         display: flex;
         overflow: hidden;
+        position: relative;
     }
 
     .card2:hover {
@@ -98,6 +191,8 @@ const technologyComponents = {
         flex-direction: column;
         justify-content: space-between;
         height: 100%; 
+        position: relative;
+        z-index: 2;
     }
 
     h2 {
@@ -146,11 +241,22 @@ const technologyComponents = {
         .card {
             width: 95%;
             padding: 3px; 
-            
         }
 
-        .card2{
+        .card2 {
             border-radius: 40px;
+            position: relative;
+        }
+
+        .card2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
         }
 
         .card2:hover {
@@ -158,41 +264,54 @@ const technologyComponents = {
             border-radius: 40px;
         }
 
-        .image-container{
+        .image-container {
             display: none;
         }
 
         .info-container {
-            padding: 25px 5px; 
+            padding: 25px 5px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         h2, h3, .period, .description {
-            text-align: center; 
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         h2 {
             font-size: 1em;
-            margin-bottom: 5px; 
+            margin-bottom: 5px;
+            color: #5680E1;
+            font-weight: bold;
         }
 
         h3 {
             font-size: .75em;
             margin-bottom: 5px;
+            color: #7ba3ff;
+            font-weight: 600;
         }
 
         .period {
             font-size: .65em;
-            margin-bottom: 15px; 
+            margin-bottom: 15px;
+            color: var(--text-color);
+            opacity: 0.9;
         }
 
-        .description{
+        .description {
             font-size: .75em;
             line-height: 2;
             margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 500;
         }
 
         .divider {
-            margin: 10px 0; 
+            margin: 10px 0;
+            background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
         }
     }
 

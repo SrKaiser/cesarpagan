@@ -100,6 +100,36 @@ const technologyComponents = {
 </div>
 
 <script>
+    // Función para agregar eventos táctiles y de clic
+    function addTouchAndClickEvent(element, callback) {
+        if (!element) return;
+        
+        let touchStartTime = 0;
+        let touchEndTime = 0;
+        
+        // Eventos táctiles para móviles
+        element.addEventListener('touchstart', (e) => {
+            touchStartTime = Date.now();
+        }, { passive: true });
+        
+        element.addEventListener('touchend', (e) => {
+            touchEndTime = Date.now();
+            // Solo ejecutar si el toque fue rápido (menos de 300ms)
+            if (touchEndTime - touchStartTime < 300) {
+                e.preventDefault();
+                callback(e);
+            }
+        }, { passive: false });
+        
+        // Evento de clic para dispositivos no táctiles
+        element.addEventListener('click', (e) => {
+            // Evitar doble ejecución en dispositivos táctiles
+            if (touchEndTime === 0 || Date.now() - touchEndTime > 100) {
+                callback(e);
+            }
+        });
+    }
+
     // Actualizar cuando cambia el idioma
     document.addEventListener('languageChanged', (event) => {
         if (event instanceof CustomEvent && event.detail && event.detail.language) {
@@ -107,10 +137,22 @@ const technologyComponents = {
         }
     });
 
-    // Inicializar con el idioma actual
+    // Configurar eventos táctiles para las tarjetas de trabajo
     document.addEventListener('DOMContentLoaded', () => {
         const currentLanguage = localStorage.getItem('language') || 'spanish';
         updateJobCards(currentLanguage);
+        
+        // Configurar eventos táctiles para dispositivos móviles
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            document.querySelectorAll('.job-card').forEach(card => {
+                addTouchAndClickEvent(card, (e) => {
+                    e.stopPropagation();
+                    card.classList.toggle('flipped');
+                });
+            });
+        }
     });
 
     // Función para actualizar las tarjetas de trabajo
@@ -266,8 +308,24 @@ const technologyComponents = {
     font-size: 18px;
   }
 
-  .card:hover .content {
-    transform: rotateY(180deg);
+  /* Hover para dispositivos no móviles */
+  @media (min-width: 769px) {
+    .card:hover .content {
+      transform: rotateY(180deg);
+    }
+  }
+
+  /* Estados para dispositivos móviles */
+  @media (max-width: 768px) {
+    .job-card {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    
+    .job-card.flipped .content {
+      transform: rotateY(180deg);
+    }
   }
 
   @keyframes rotation_481 {

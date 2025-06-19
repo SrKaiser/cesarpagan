@@ -6,22 +6,51 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.header');
   const navLinks = document.querySelectorAll('.navigation-right a');
 
+  // Función para agregar eventos táctiles y de clic
+  function addTouchAndClickEvent(element, callback) {
+    if (!element) return;
+    
+    let touchStartTime = 0;
+    let touchEndTime = 0;
+    
+    // Eventos táctiles para móviles
+    element.addEventListener('touchstart', (e) => {
+      touchStartTime = Date.now();
+    }, { passive: true });
+    
+    element.addEventListener('touchend', (e) => {
+      touchEndTime = Date.now();
+      // Solo ejecutar si el toque fue rápido (menos de 300ms)
+      if (touchEndTime - touchStartTime < 300) {
+        e.preventDefault();
+        callback(e);
+      }
+    }, { passive: false });
+    
+    // Evento de clic para dispositivos no táctiles
+    element.addEventListener('click', (e) => {
+      // Evitar doble ejecución en dispositivos táctiles
+      if (touchEndTime === 0 || Date.now() - touchEndTime > 100) {
+        callback(e);
+      }
+    });
+  }
+
   function handleMenuToggle() {
-    toggleButton.addEventListener('click', () => {
+    addTouchAndClickEvent(toggleButton, () => {
       navRight.classList.toggle('active');
       header.classList.toggle('active');
     });
 
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
+      addTouchAndClickEvent(link, () => {
         navRight.classList.remove('active');
         header.classList.remove('active');
       });
     });
   }
 
-
-  // Función para alternal el modo claro y oscuro
+  // Función para alternar el modo claro y oscuro
   const switchControl = document.querySelector('.ui-switch input[type="checkbox"]');
   const html = document.documentElement;
 
@@ -40,13 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Función para el desplazamiento suave y ajustado a secciones
-  const headerHeight = header.offsetHeight; 
-
   function handleSmoothScroll() {
     navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
+      addTouchAndClickEvent(link, (e) => {
         e.preventDefault();
-        const targetId = this.getAttribute('href');
+        const targetElement = e.currentTarget;
+        const targetId = targetElement.getAttribute('href');
         const targetSection = document.querySelector(targetId);
 
         if (targetId === '#about-me') {
@@ -56,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             behavior: 'smooth'
           });
         } else if (targetSection) {
+          const headerHeight = header.offsetHeight;
           const topPosition = targetSection.offsetTop - headerHeight - 50;
           window.scrollTo({
             top: topPosition,
@@ -74,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       let index = sections.findIndex((section, idx) => {
+        if (!section) return false;
         const rect = section.getBoundingClientRect();
         const nextRect = sections[idx + 1] ? sections[idx + 1].getBoundingClientRect() : null;
         return (rect.top + window.scrollY <= scrollPosition) && (!nextRect || nextRect.top + window.scrollY > scrollPosition);
